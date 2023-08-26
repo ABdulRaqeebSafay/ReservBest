@@ -28,6 +28,7 @@ const Hotels = () =>{
                 <a href="#" className="  btn btn-primary">More Details</a>
             </div>
         </div>
+        <button className="btn btn secondary">View More</button>
     </div>
     </div>)
 }
