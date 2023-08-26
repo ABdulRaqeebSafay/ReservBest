@@ -4,7 +4,7 @@ import Navbar from './navbar';
 const Contact = () =>{
     return (<>
         
-        <h1>This is contact Page</h1>
+        <h1>This is the Contact page with the Developer</h1>
     </>)
 }
 
