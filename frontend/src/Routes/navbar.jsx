@@ -27,10 +27,7 @@ const toggleMenu = () => {
   setIsOpen(!isOpen);
 };
 return(<div className="navbar-page">
- {/* <h4 style={{ textAlign: 'left', color: 'red' , fontSize: '20px'}}>
-        The Web Application is Under Development.
-          .ویب اپلیکیشن تحت توسعه قرار ویب اپلیکیشن تحت توسعه قرار دارد بعضی از قابلیت ها شاید درست کار نکند
-      </h4> */}
+
 <div className={`d-flex d-lg-none  burger-menu ${isOpen ? '' : 'open'}`} onClick={toggleMenu}>
 <div className="bar"></div>
 <div className="bar"></div>

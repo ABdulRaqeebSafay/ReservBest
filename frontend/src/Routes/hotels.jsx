@@ -13,7 +13,7 @@ const Hotels = () => {
   const [searchQuery, setSearchQuery] = useState(''); 
   const [searchResultMessage, setSearchResultMessage] = useState(""); 
   const itemsPerPage = 6; 
-  const baseUrl = 'http://localhost:5000';
+  const baseUrl = 'https://reserv-best-backend.vercel.app';
 
   useEffect(() => {
     axios
@@ -75,7 +75,11 @@ const Hotels = () => {
     }
 
     return (
+  
       <nav aria-label="Page navigation">
+            <div className="alert alert-danger" role="alert">
+              Website is under Development, features will work correctly as soon...!
+            </div>
         <ul className="pagination justify-content-center">
           <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
             <button
