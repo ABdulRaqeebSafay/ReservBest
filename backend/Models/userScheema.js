@@ -1,0 +1,26 @@
+// Import mongoose with CommonJS syntax if not using ESM
+import mongoose from 'mongoose'
+const userSchema = new mongoose.Schema({
+  userName: {
+    type: String,
+    required: true,
+  },
+  userPhone: {
+    type: Number,
+    required: true,
+  },
+  userEmail: {
+    type: String,
+    required: true,
+  },
+  userPassword: {
+    type: String,
+    required: true,
+  }
+});
+
+// Change the model name to 'User' (conventionally singular)
+const User = mongoose.model('User', userSchema);
+
+// Export the User model
+export default User;

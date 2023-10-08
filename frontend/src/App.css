@@ -1,0 +1,534 @@
+
+.main{
+
+  margin:0px;
+  padding:0px;
+
+}
+
+
+.home,.hotels-page,.navbar-page,.contact{
+background-color:rgb(236, 230, 230);
+}
+.booking-page{
+  color:#c97f08;
+  font-size:14px;
+
+}
+
+.home,.hotels-page{
+  min-width:100wh;
+  min-height:100vh;
+  width:100%;
+  height:100%;
+
+}
+h5{
+color:#c97f08;
+}
+
+.body{
+background-color: #c97f08
+}
+.langs{
+  position:absolute;
+  top:0;
+  padding-top:10px;
+  right:10px;
+  z-index:200000000
+}
+.languages{
+border-radius:5px;
+background:rgb(236, 230, 230);
+border:none;
+outline:none; 
+color:#c97f08;
+}
+.custom-dropdown {
+  position: relative;
+  width: 120px;
+  cursor: pointer;
+  color:#c97f08;
+  padding:3px;
+  font-size:14px;
+}
+
+.dropdown-header {
+  border: 1px solid rgb(236, 230, 230);
+  padding: 10px;
+  background-color: rgb(236, 230, 230);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  transition: transform 0.2s ease-in-out;
+  background:rgb(236, 230, 230);
+  color:#c97f08;
+  font-weight:400;
+  font-size:16px;
+
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+ 
+  
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: rgb(236, 230, 230);
+  border: 1px solid rgb(236, 230, 230);
+  color:#c97f08;;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  list-style: none;
+  padding: 5px;
+  margin: 0;
+  font-size: 17px;
+
+}
+
+
+.options li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.options li:hover {
+  background-color: rgb(from color r g b);
+}
+
+
+.links{
+  position: absolute;
+  top:0;
+  padding-top:25px;
+  left:15px;
+  font-size:20px;
+  color:rgb(236, 230, 230);
+}
+
+.routes{
+color:#c97f08;
+text-decoration: none;
+text-transform: capitalize;
+font-size:25px;
+transition:border-bottom 1s ease-in;
+}
+.routes:hover{
+  font-size:27px;
+  color:#c97f08;
+  
+}
+
+.card:hover{
+  
+  transform:scale(1.03);
+  transition:0.2s ease-in;
+}
+
+.burger-menu {
+  width: 30px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position:absolute;
+  margin:10px;
+  transition: transform 0.3s ease;
+ 
+}
+
+.bar {
+  width: 30px;
+  height: 4px;
+  background-color: #c97f08;
+  transition: transform 0.3s ease;
+  z-index:10000000;
+  cursor:pointer
+}
+
+.open .bar:nth-child(1) {
+  transform: translateY(10px) rotate(-45deg);
+}
+
+.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.open .bar:nth-child(3) {
+  transform: translateY(-10px) rotate(45deg);
+}
+
+.menu-links{
+  transform:translateX(-320px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 30px; 
+  left: 50px;
+  width:250px;
+  height:250px;
+  background-color:#c97f08;
+  box-shadow: 0 2px 4px rgba(133,133,6, 0.1);
+  z-index:1000;
+  padding:10px;
+  transform:translateX(-320px);
+  transition: 0.4s ease-out;
+
+}
+.sm-links{
+  color:rgb(255, 252, 252);
+  font-size:20px;
+  padding:20px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.sm-links:hover{
+  color:white;
+}
+.opened{
+  transform:translateX(-60px);
+}
+
+
+.calendar {
+  font-family: Arial, sans-serif;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  width: 300px; 
+}
+
+.calendar-day {
+  width: 40px; 
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.current-month {
+  background-color: #c97f08;
+  color:black;
+}
+
+.other-month {
+  color: #aaa;
+}
+
+.today {
+  background-color: rgb(26, 26, 179);
+}
+.register-inputes{
+
+  border:2px solid #c97f08;
+  width:95%;
+  border-radius: 5px;
+  padding:5px;
+  margin-top:10px;
+  
+}
+.register-inputes:active{
+  border:1px solid#c97f08;
+}
+
+
+.button{
+  color:#c97f08;
+  background:rgb(236, 230, 230);;
+  border:1px solid #c97f08;
+  border-radius:5px;
+  padding:8px;
+  width:90%;
+  margin-top:10px;
+  font-weight:bold;
+  text-decoration:none;
+}
+.button:hover{
+  background-color:  #c97f08;
+  color:rgb(236, 230, 230);;
+}
+.signup{
+  height:100vh;
+  width:100.8%;
+  background-color: rgb(255, 252, 252);
+ 
+ overflow-y:hidden;
+}
+.welcome,.create-account,.question{
+  color:#c97f08;
+  
+}
+.welcome{
+  font-family: 'Phudu', cursive;
+
+}
+@media (max-width: 991px) {
+  .register{
+    background-image: url('./photo5.jpg'); 
+    background-size: cover; 
+    position: relative;
+    background-repeat: no-repeat; 
+    background-position: center;
+     z-index:100;    
+     overflow:hidden;
+     
+
+  }
+  .register::after{
+    content:'';
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1000000000;
+    
+  }
+  .welcome,.create-account{
+    color:rgb(236, 230, 230);;
+  }
+  .languages{
+
+    z-index:10000000000;
+  }
+
+}
+.create-account{
+  color:#c97f08;
+  text-decoration: none;
+}
+
+.mockup{
+  position:absolute;
+  right:10%;
+  top:100px;
+ 
+}
+
+.get-started{
+position:absolute;
+top:60%;
+left:10%;
+border:none;
+background-color: #c97f08;
+padding:10px 25px;
+border-radius:10px;
+color:rgb(236, 230, 230);;
+cursor:pointer; 
+transition:0.2s ease-in-out;
+text-decoration:none;
+font-weight:bold;
+font-family: 'Phudu', cursive;
+
+}
+.get-started:hover{
+transform:scale(1.08);
+color:rgb(236, 230, 230);;
+}
+
+.typing-animation {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  position:absolute;
+  top:35%;
+  font-family: 'Phudu', cursive;
+  color:#c97f08;
+  left:20%;
+}
+
+.typing-animation.show {
+  opacity: 1;
+
+}
+
+.contact-page {
+  background-color: #ece6e6;
+  color: #fff;
+  padding: 50px;
+}
+
+.contact-content {
+  max-width: 600px;
+  margin: 0 auto;
+  color:#c97f08;
+}
+
+.contact-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.contact-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  color:#c97f08;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border:2px solid #c97f08;
+
+  background-color: rgb(236, 230, 230);
+  border-radius: 4px;
+}
+
+.contact-form button {
+  background-color: #c97f08;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.menus{
+  padding:30px;
+  overflow: hidden;
+  color:#c97f08;
+
+}
+.menus>h1{
+  font-weight:bold;
+}
+.menus>div{
+  border:2px solid #c97f08;
+  padding:35px 20px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align:center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+ 
+}
+
+label{
+  font-size: 25px;
+} 
+input[type="radio"]{
+  width:30px;
+  height:30px;
+  accent-color: #c97f08;
+  position:absolute;
+  right:10%;
+} 
+input[type="radio"]:active{
+  align-content:baseline;
+}
+
+.pagination .page-link {
+  color: #c97f08;
+  background-color: white;
+  border-color: #c97f08;
+}
+
+.pagination .page-item.active .page-link {
+  color: white;
+  background-color: #c97f08;
+  border-color: #c97f08;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #c97f08;
+  background-color: white;
+  border-color: #c97f08;
+}
+
+/* Override Bootstrap hover styles */
+.pagination .page-link:hover {
+  color: white;
+  background-color: #c97f08;
+  border-color: #c97f08;
+}
+.searchbar{
+  width: 60%;
+  height:60px;
+  border-radius:15px;
+  padding:10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right:none;
+  
+}
+.search-btn{
+  background:#c97f08;
+  color:white;
+  height:61px;
+  border-top-right-radius:5px;
+  border-bottom-right-radius:5px;
+  border:1px solid black;  
+
+}
+.clear-btn{
+  height:70px;
+  border:1px solid #c97f08;
+  border-radius: 3px;
+  margin: left 2px;;
+  color:#c97f08;
+  display:none;
+}
+.sticky-bottom {
+  position: sticky;
+  top: 0;
+  background-color: white; /* You can change the background color if needed */
+  z-index: 100; /* You can adjust the z-index to control the stacking order */
+}
+
+input[type="number"]{
+  width:200px;
+  height:40px;
+  border-radius:5px;
+  padding:3px;
+  margin-left:50px;
+}
+.price{
+  font-weight:bold;
+  font-size:30px;
+  
+}
+.reserv{
+  position:fixed ; 
+  bottom: 0px;
+   left: 45% ;
+   background:#c97f08;
+   border-radius:5px;
+   width:200px;
+   height:50px;
+   color:white;
+   font-size: 15px;;
+}
