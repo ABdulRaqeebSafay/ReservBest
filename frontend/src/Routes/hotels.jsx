@@ -13,7 +13,7 @@ const Hotels = () => {
   const [searchQuery, setSearchQuery] = useState(''); 
   const [searchResultMessage, setSearchResultMessage] = useState(""); 
   const itemsPerPage = 6; 
-  const baseUrl = 'https://reserv-best-backend.vercel.app';
+  const baseUrl = 'http://localhost:5000';
 
   useEffect(() => {
     axios

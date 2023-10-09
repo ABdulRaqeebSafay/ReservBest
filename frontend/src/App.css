@@ -223,28 +223,24 @@ transition:border-bottom 1s ease-in;
   gap: 4px;
   width: 300px; 
 }
-
-.calendar-day {
-  width: 40px; 
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
 .current-month {
-  background-color: #c97f08;
+  
   color:black;
 }
 
 .other-month {
   color: #aaa;
 }
-
-.today {
-  background-color: rgb(26, 26, 179);
+.dropdown-toggle{
+  width: 60px; 
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size:14px;
+  background:#d8952a
 }
 .register-inputes{
 

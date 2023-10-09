@@ -14,8 +14,7 @@ const MenuGradeOne = ({ hotel_name }) => {
   const [menuPrice, setMenuPrice] = useState();
 
   let selectedItem;
-  const baseUrl = "https://reserv-best-backend.vercel.app";
-
+  const baseUrl = "http://localhost:5000";
 
   useEffect(() => {
     axios.get(`${baseUrl}/hotels/${hotel_name}/getMenuGradeOne`)

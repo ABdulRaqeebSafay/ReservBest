@@ -13,6 +13,7 @@ import Login from './Routes/login'
 
 
 import BookingPage from './Routes/bookingPage';
+import HotelAdminPanel from './hotelAdminPanel';
 
 
 const App = () => {
@@ -61,6 +62,7 @@ const App = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
+        <Route path="hotelAdminPanel" element={<HotelAdminPanel />} />
       </Routes>
       
 {/* <button className="btn btn-primary"  onClick={handleSignInClick}>Sign In with Google</button> */}

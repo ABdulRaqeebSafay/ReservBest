@@ -7,7 +7,7 @@ import NormalMenu from '../details/normalMenu';
 import MenuGradeOne from '../details/menuGradeOne';
 import MenuGradeTwo from '../details/menuGradeTwo';
 import MenuGradeThree from '../details/menuGradeThree';
-import Hosts from '../details/hosts';
+import Calendar from '../calendar'
 
 const BookingPage = () => {
   const { hotel_name } = useParams();
@@ -28,6 +28,9 @@ const BookingPage = () => {
         Welcome to {hotel_name} Menu
       </h1>
 
+      <Calendar />
+
+      
       <div className="menus">
         
         {hotels.map((menu, index) => (
