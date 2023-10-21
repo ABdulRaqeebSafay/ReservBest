@@ -17,7 +17,7 @@ const Home = () => {
   };
 
   return (
-    <div className="home ">
+    <div className="home">
         <img src="/mockup.png" className="mockup" />
         <Link to="./hotels" className="get-started">Get started</Link>
     </div>

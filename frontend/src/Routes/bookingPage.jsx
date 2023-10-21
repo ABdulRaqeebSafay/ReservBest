@@ -7,7 +7,7 @@ import NormalMenu from '../details/normalMenu';
 import MenuGradeOne from '../details/menuGradeOne';
 import MenuGradeTwo from '../details/menuGradeTwo';
 import MenuGradeThree from '../details/menuGradeThree';
-import Calendar from '../calendar'
+import Calendar from '../calendar';
 
 const BookingPage = () => {
   const { hotel_name } = useParams();
@@ -22,6 +22,12 @@ const BookingPage = () => {
     { label: 'Menu Grade Three', component: <MenuGradeThree hotel_name={hotel_name} /> },
   ];
 
+  const handleMenuChange = (menuLabel) => {
+    // Log the selected menu label to the console
+    console.log(`Selected menu: ${menuLabel}`);
+    setSelectedMenu(menuLabel);
+  };
+
   return (
     <div className="booking-page">
       <h1 className="text-center text-danger" style={{ paddingTop: '100px' }}>
@@ -30,9 +36,7 @@ const BookingPage = () => {
 
       <Calendar />
 
-      
       <div className="menus">
-        
         {hotels.map((menu, index) => (
           <div className="row" key={index}>
             <div className="col">
@@ -42,13 +46,12 @@ const BookingPage = () => {
                   value={menu.label}
                   name="menu"
                   checked={selectedMenu === menu.label}
-                  onChange={() => setSelectedMenu(menu.label)}
+                  onChange={() => handleMenuChange(menu.label)} // Call the event handler
                 />
                 <h2>{menu.label}</h2>
               </label>
               {selectedMenu === menu.label ? menu.component : null}
             </div>
-            
           </div>
         ))}
       </div>

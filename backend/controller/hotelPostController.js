@@ -81,30 +81,24 @@ class HotelPostController {
     }
 }
 
- 
- 
-  
-  static async login(req, res) {
- 
-      const { userEmail, userPassword } = req.body;
-      await User.findOne({ userEmail })
-      .then(user =>{
-          if(user){
-            if(user.userPassword === userPassword){
-              res.send("success")
-              
-            }
-            else{
-               res.send("password is incorrect")
+static async login(req, res) {
+  const { userEmail, userPassword } = req.body;
 
-            }
-          }
-          else{
-            res.send("email is not exist")
-          }       
-      })
-  
+  // Find the user by email
+  const user = await User.findOne({ userEmail });
+
+  if (user) {
+    if (user.userPassword === userPassword) {
+      const { userEmail, _id, userName, userPhone } = user; // Include userName and userPhone
+      res.json({ message: "success", body: { userEmail, _id, userName, userPhone } });
+    } else {
+      res.send("Password is incorrect");
+    }
+  } else {
+    res.send("Email is not found");
   }
+}
+
   
   
   static async addExtraMenu(req, res) {

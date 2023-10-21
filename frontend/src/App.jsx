@@ -14,6 +14,7 @@ import Login from './Routes/login'
 
 import BookingPage from './Routes/bookingPage';
 import HotelAdminPanel from './hotelAdminPanel';
+import UserDashboard from './details/userDashboard';
 
 
 const App = () => {
@@ -62,6 +63,10 @@ const App = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
+        <Route path="/user/:_id" element={<UserDashboard />} />
+
+
+
         <Route path="hotelAdminPanel" element={<HotelAdminPanel />} />
       </Routes>
       

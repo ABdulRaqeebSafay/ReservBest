@@ -6,9 +6,10 @@
 
 }
 
-
-.home,.hotels-page,.navbar-page,.contact{
+.home,.hotels-page,.navbar-page,.contact,.userDashboard{
 background-color:rgb(236, 230, 230);
+color:#c97f08;
+
 }
 .booking-page{
   color:#c97f08;
@@ -16,7 +17,7 @@ background-color:rgb(236, 230, 230);
 
 }
 
-.home,.hotels-page{
+.home,.hotels-page,.userDashboard{
   min-width:100wh;
   min-height:100vh;
   width:100%;
@@ -527,4 +528,19 @@ input[type="number"]{
    height:50px;
    color:white;
    font-size: 15px;;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #dddddd; /* Add this line to set cell borders */
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
 }

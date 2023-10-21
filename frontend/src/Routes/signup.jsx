@@ -26,39 +26,30 @@ const Signup = () =>{
      })
      
      const onSubmit = () => {
-     
-     axios.post("http://localhost:5000/signup",
-     { userName:values.name, 
-      userPhone:values.phone, 
-      userEmail:values.email, 
-      userPassword:values.password })
-
-     .then(response => {
-      console.log("THE API RESPONSE :" + response);
-      setData(response.data);
-      if(response.data !== "The email is not valid"){
-        if(response.data !== "The email is already registered"){
-          console.log("the" + response.data + "register in db");
-          navigate("/login")
-        }
-        else{
-          console.log("the email is a real email but already registered");
-          setData("the email is already registered")
-        }
-      }
-      else{
-        console.log("the is not  a real email");
-        setData("this is email not exist!!!")
-      }
+      axios.post("http://localhost:5000/signup", {
+        userName: values.name,
+        userPhone: values.phone,
+        userEmail: values.email,
+        userPassword: values.password
       })
-     .catch(e=> {
-       console.log("error", e.message)
-      setData("please enter a valid email")
-     }
-      )
-      
-        
-    }
+        .then((response) => {
+          if (response.data === "The email is not valid") {
+            console.log("This is not a valid email");
+            setData("This email is not valid.");
+          } else if (response.data === "The email is already registered") {
+            console.log("This email is already registered.");
+            setData("This email is already registered.");
+          } else {
+            console.log(`User ${values.email} is registered.`);
+            setData(""); // Clear the error message
+            navigate("/login"); // Navigate to the login page
+          }
+        })
+        .catch((e) => {
+          console.log("Error:", e.message);
+          setData("Please enter a valid email");
+        });
+    };
     
 
 const {values,touched ,handleChange,handleSubmit,errors} = useFormik({

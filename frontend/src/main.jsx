@@ -1,17 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App.jsx'
-import './index.css'
-import "./App.css"
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App.jsx';
+import './app.css';
 import Bootstrap from '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { UserProvider } from './Routes/context.jsx'
-
-
+import { CombinedProvider } from './details/combinedContext.jsx'; // Import the combined context
 
 ReactDOM.render(
-    <UserProvider>
-      <App />
-    </UserProvider>,
-    document.getElementById('root')
-  );
+  <CombinedProvider>
+    <App />
+  </CombinedProvider>,
+  document.getElementById('root')
+);

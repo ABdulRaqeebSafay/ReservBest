@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { startOfMonth, addDays, format, isSameMonth, isToday } from 'date-fns';
+import Hosts from './details/hosts';
+
 
 const Calendar = () => {
+
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today);
   const [userMode, setUserMode] = useState(false); // Default is admin mode
@@ -46,7 +49,7 @@ const Calendar = () => {
         [day]: false,
       }));
   
-      console.log(`${format(day, 'yyyy-MM-dd')}: ${option}`);
+      console.log(`selectedOption in calendar: ${format(day, 'yyyy-MM-dd')}: ${option}`);
     }
   };
   
@@ -145,6 +148,7 @@ const Calendar = () => {
           </div>
         ))}
       </div>
+      
     </div>
   );
 };

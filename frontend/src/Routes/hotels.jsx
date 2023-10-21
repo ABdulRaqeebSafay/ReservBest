@@ -128,13 +128,13 @@ const Hotels = () => {
   const skeletonCards = Array.from({ length: numSkeletons }, (_, index) => (
     <div
       key={`skeleton-${index}`}
-      className={`card text-center col-sm-6 col-md-4 my-2 ${
+      className={`card ps-1 text-center col-sm-6 col-md-4 my-2 ${
         index % 4 === 0 ? 'first-in-row' : ''
       }`}
     >
       <SkeletonTheme color="#333" highlightColor="rgb(211, 207, 207)">
         <div className="card-img-top">
-          <Skeleton width={400} height={200} />
+          <Skeleton width={320} height={200} />
         </div>
         <div className="card-body">
           <Skeleton className="skeleton-animation" width={200} height={20}></Skeleton>

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Link } from "react-router-dom";
-import { useUser } from './context';
+import { useLogged } from '../details/context';
 
 
 
@@ -8,7 +8,7 @@ import { useUser } from './context';
 const Navbar = () =>{
   const [isOpen, setIsOpen] = useState(true);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const { isLoggedIn } = useUser();
+  const { isLoggedIn } = useLogged();
  
   const [selectedOption, setSelectedOption] = useState("English");
   const options = ['English', 'Dari', 'Pashto'];
@@ -73,6 +73,7 @@ return(<div className="navbar-page">
             <Link to="/" className="routes d-none d-lg-inline  me-3" >Home</Link>
             <Link to="hotels" className="routes d-none   d-lg-inline me-3" >Hotels</Link>
             <Link to="contact" className= "routes d-none d-lg-inline  me-5" > Contact</Link>
+
         </div>
         
               

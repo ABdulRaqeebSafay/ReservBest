@@ -5,6 +5,7 @@ import NormalMenu from '../Models/normalMenu.js';
 import MenuGrade1 from '../Models/menuGrade1.js';
 import MenuGrade2 from '../Models/menuGrade2.js';
 import MenuGrade3 from '../Models/menuGrade3.js';
+import User from '../Models/userScheema.js';
 
 class HotelGetController{
 static async getHotels(req, res) {
@@ -84,10 +85,33 @@ static async getExtraMenus(req, res) {
     }
   }
 
-
-
-
-
+  static async getUserDetails(req, res) {
+    const { _id } = req.params; // Extract the user's unique identifier from the request params
+  
+    // Check if the user identifier is provided
+    if (!_id) {
+      return res.status(400).send("User identifier is missing");
+    }
+  
+    try {
+      // Find the user based on their unique identifier (e.g., _id or userEmail)
+      const user = await User.findById(_id);
+  
+      if (user) {
+        // If the user is found, return their userName and userPhoneNumber
+        const { userName, userPhone,userEmail } = user;
+        res.json({ message: "success", body: { userName, userPhone,userEmail } });
+      } else {
+        res.status(404).send("User not found");
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred while fetching user data");
+    }
+  }
+  
+  
+  
 }
 
   export default HotelGetController;

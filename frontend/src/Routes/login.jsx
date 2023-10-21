@@ -1,44 +1,48 @@
 
 
 import { useNavigate,Link } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from 'yup'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import axios from "axios";
-import { useUser } from './context';
+import { useLogged } from '../details/context';
+import {useUser} from '../details/userContext';
 
 
 
+const Login = () => {
+  const {userData,setUserData} = useUser();
+  // const history = useHistory();
 
-
-
-const Login = () =>{
   
   const [data, setData] = useState();
-  const { isLoggedIn, setIsLoggedIn } = useUser();
+  const { isLoggedIn, setIsLoggedIn } = useLogged();
 
     let navigate = useNavigate();
-
     let schema = yup.object( {
-       
-       email:yup.string().email('please enter a valid email').required('email is required field *'),
-       
+    email:yup.string().email('please enter a valid email').required('email is required field *'),
+
        password:yup.string().min(4).max(32).required('password is required field *')
      })
      
      const onSubmit = () => {
-     
-      axios.post("http://localhost:5000/login", { userEmail: values.email, userPassword: values.password })
-        .then((response) => {
-          setData(response.data);
-          if (response.data === "success") {
-            setIsLoggedIn(false);
-            navigate("/hotels");
-          }
-        })
-        .catch((e) => console.log(e.message));
-    };
+       axios.post("http://localhost:5000/login", { userEmail: values.email, userPassword: values.password })
+       .then((response) => {
+      setData(response.data);
+      console.log(response.data);
     
+    if (response.data.message === "success") {
+      // Set user data in context
+      setUserData(response.data.body); 
+      // history.push(`/user/${response.data.body._id}`);/
+      setIsLoggedIn(false);
+      navigate(`/user/${response.data.body._id}`);
+    }
+  })
+  .catch((e) => console.log(e.message));
+
+    };
     
 
 const {values,touched ,handleChange,handleSubmit,errors} = useFormik({
@@ -50,7 +54,23 @@ const {values,touched ,handleChange,handleSubmit,errors} = useFormik({
   onSubmit,
 });
 
+// useEffect(() => {
+//   // Block navigation to the login page from the dashboard
+//   const unblock = history.block((location, action) => {
+//     if (location.pathname === '/login' && action === 'POP') {
+//       history.push('/'); // Redirect to the home page
+//       return false; // Prevent the navigation
+//     }
+//     else if( location.pathname === '/hotels/:hotel_name' && action === 'POP'){
+//       history.push('/hotels')
+//       return true;
+//     }
+//   });
 
+//   return () => {
+//     unblock(); // Unregister the blocking when the component unmounts
+//   };
+// }, [history]);
 
     return(
          <>
@@ -67,12 +87,12 @@ const {values,touched ,handleChange,handleSubmit,errors} = useFormik({
            
                       <div className="form-group">
                          <input type="email" onChange={handleChange} placeholder="Enter you email" value={values.email} id="email" className="register-inputes" /><br />
-                             {data == "email is not exist" ? <small className="text-danger">{data}</small> : errors.email && touched.email &&  <small className="text-danger">{errors.email}</small>}
+                             {data == "email is not exist" || data == "Email is not found" ? <small className="text-danger">{data}</small> : errors.email && touched.email &&  <small className="text-danger">{errors.email}</small>}
                       </div>
 
                       <div className="form-group">
                          <input type="password" onChange={handleChange} autoComplete="off" placeholder="Enter Your Password" value={values.password} id="password" className="register-inputes" /><br />
-                          {data === "password is incorrect" ? <small className="text-danger">{data}</small> : errors.password && touched.password &&  <small className="text-danger">{errors.password}</small> }
+                          {data === "Password is incorrect" ? <small className="text-danger">{data}</small> : errors.password && touched.password &&  <small className="text-danger">{errors.password}</small> }
 
                       </div>
 

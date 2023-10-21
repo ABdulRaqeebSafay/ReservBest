@@ -2,6 +2,7 @@ import HotelPostController from '../controller/hotelPostController.js'
 import HotelGetController from '../controller/hotelGetController.js'
 import express from 'express';
 import multer from 'multer';
+ 
 const storage = multer.memoryStorage();
 const upload = multer({storage});
 const router = express.Router();
@@ -16,6 +17,8 @@ router.get('/hotels/:hotel_name/getNormalMenu', HotelGetController.getNormalMenu
 router.get('/hotels/:hotel_name/getMenuGradeOne', HotelGetController.getMenuGradeOne);
 router.get('/hotels/:hotel_name/getMenuGradeTwo', HotelGetController.getMenuGradeTwo);
 router.get('/hotels/:hotel_name/getMenuGradeThree', HotelGetController.getMenuGradeThree);
+router.get('/user/:_id', HotelGetController.getUserDetails);
+
 
 // ALL POST REQUESTS
 
