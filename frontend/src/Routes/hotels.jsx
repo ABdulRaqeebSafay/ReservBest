@@ -6,7 +6,9 @@ import axios from 'axios';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+
 const Hotels = () => {
+  
   const [hotels, setHotels] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,6 +23,7 @@ const Hotels = () => {
       .then((response) => {
         setHotels(response.data);
         setIsLoading(false);
+        
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -134,12 +137,12 @@ const Hotels = () => {
     >
       <SkeletonTheme color="#333" highlightColor="rgb(211, 207, 207)">
         <div className="card-img-top">
-          <Skeleton width={320} height={200} />
+          <Skeleton width={380} height={200} />
         </div>
         <div className="card-body">
           <Skeleton className="skeleton-animation" width={200} height={20}></Skeleton>
           <Skeleton width={200} height={20}></Skeleton>
-          <p className="card-text">
+          <div className="card-text">
             <div>
               <div className="d-inline">
                 <Skeleton width={50} height={20} />
@@ -148,7 +151,7 @@ const Hotels = () => {
                 <Skeleton width={150} height={20} />
               </div>
             </div>
-          </p>
+          </div>
           <Skeleton width={70} height={30}></Skeleton>
         </div>
       </SkeletonTheme>

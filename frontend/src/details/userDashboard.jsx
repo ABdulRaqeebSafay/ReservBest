@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import AllDetails from "../Routes/allDetails";
 
 const UserDashboard = () => {
   const { _id } = useParams();
@@ -26,11 +27,8 @@ const UserDashboard = () => {
 
   return (
     <div className="userDashboard" style={{paddingTop:'140px'}}>
-      <h1>User Dashboard</h1>
-      
-      <p>User Name: {userName}</p>
-      <p>User Phone: {userPhone}</p>
-      <p>User Email: {userEmail}</p>
+    
+      <AllDetails />
     </div>
   );
 };

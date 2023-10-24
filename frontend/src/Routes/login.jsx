@@ -4,7 +4,7 @@ import { useNavigate,Link } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from 'yup'
-import {useEffect, useState} from 'react'
+import { useState} from 'react'
 import axios from "axios";
 import { useLogged } from '../details/context';
 import {useUser} from '../details/userContext';
@@ -12,12 +12,11 @@ import {useUser} from '../details/userContext';
 
 
 const Login = () => {
-  const {userData,setUserData} = useUser();
+  const {setUserData} = useUser();
   // const history = useHistory();
-
   
   const [data, setData] = useState();
-  const { isLoggedIn, setIsLoggedIn } = useLogged();
+  const {  setIsLoggedIn } = useLogged();
 
     let navigate = useNavigate();
     let schema = yup.object( {
@@ -40,7 +39,7 @@ const Login = () => {
       navigate(`/user/${response.data.body._id}`);
     }
   })
-  .catch((e) => console.log(e.message));
+  .catch(() => console.log("user not foun"))
 
     };
     

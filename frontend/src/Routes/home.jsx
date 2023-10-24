@@ -1,5 +1,6 @@
 import  { useEffect } from 'react';
 import {Link} from 'react-router-dom'
+import TypingAnimation from '../typingAnimation';
 
 const Home = () => {
   
@@ -18,7 +19,8 @@ const Home = () => {
 
   return (
     <div className="home">
-        <img src="/mockup.png" className="mockup" />
+      <TypingAnimation />
+        {/* <img src="/mockup.png" className="mockup" />   */}
         <Link to="./hotels" className="get-started">Get started</Link>
     </div>
     

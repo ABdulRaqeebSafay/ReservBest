@@ -1,11 +1,14 @@
-import  { useState, useEffect } from 'react';
+import  { useState } from 'react';
 import { startOfMonth, addDays, format, isSameMonth, isToday } from 'date-fns';
-import Hosts from './details/hosts';
+import { useSelectedDate } from './details/calendarContext';
+import { useDayStatus } from './details/dayStatusContext';
 
 
 const Calendar = () => {
 
   const today = new Date();
+  const {setSelectedDate} = useSelectedDate();
+  const {setDayStatus} = useDayStatus();
   const [currentMonth, setCurrentMonth] = useState(today);
   const [userMode, setUserMode] = useState(false); // Default is admin mode
 
@@ -34,7 +37,8 @@ const Calendar = () => {
           [day]: false,
         }));
   
-        console.log(`${format(day, 'yyyy-MM-dd')}: ${option}`);
+        setSelectedDate(format(day, 'yyyy-MM-dd'));
+        setDayStatus(option)
       }
     } else {
       // For date options, always allow selection
@@ -49,7 +53,8 @@ const Calendar = () => {
         [day]: false,
       }));
   
-      console.log(`selectedOption in calendar: ${format(day, 'yyyy-MM-dd')}: ${option}`);
+      setSelectedDate(format(day, 'yyyy-MM-dd'));
+      setDayStatus(option);
     }
   };
   

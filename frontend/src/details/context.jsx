@@ -16,3 +16,4 @@ export const UserProvider = ({ children }) => {
 export const useLogged = () => {
   return useContext(Context);
 };
+

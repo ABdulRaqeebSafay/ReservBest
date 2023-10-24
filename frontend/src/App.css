@@ -210,6 +210,9 @@ transition:border-bottom 1s ease-in;
   max-width: 350px;
   margin: 0 auto;
 }
+.buttons{
+  background:#c97f08; 
+}
 
 .calendar-header {
   display: flex;

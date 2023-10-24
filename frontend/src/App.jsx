@@ -67,7 +67,7 @@ const App = () => {
 
 
 
-        <Route path="hotelAdminPanel" element={<HotelAdminPanel />} />
+        <Route path="hotelAdminPanel/:_hotel_name" element={<HotelAdminPanel />} />
       </Routes>
       
 {/* <button className="btn btn-primary"  onClick={handleSignInClick}>Sign In with Google</button> */}

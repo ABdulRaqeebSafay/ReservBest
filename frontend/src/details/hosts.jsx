@@ -1,60 +1,31 @@
 // Hosts.js
 import { useState, useEffect } from "react";
-import jsPDF from "jspdf";
-import {format} from 'date-fns';
+
 import { useLogged } from '../details/context';
 import { Link } from "react-router-dom"; 
 import { useUser } from "./userContext";
+import { useGuestNumber } from "../Routes/guestAmountContext";
 
 
-
-const Hosts = ({ hotel_name, menuPrice, selectedOptions }) => { // Remove the default value
-  selectedOptions = {...selectedOptions} || {};// Provide a default value
+const Hosts = ({ hotel_name, menuPrice, }) => { // Remove the default value
+  
   const [hostNumber, setHostNumber] = useState();
-  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalAmount,setTotalAmount] = useState(0);
   const { isLoggedIn } = useLogged();
-  const {userData,setUserData} = useUser();
+  const {userData} = useUser();
+  const {guestAmount,setGuestAmount} = useGuestNumber();
 
 
 
-  const formattedTotal = isNaN(hostNumber)
-    ? ""
-    : (hostNumber * menuPrice).toLocaleString();
 
   useEffect(() => {
+  setGuestAmount(hostNumber * menuPrice);
     // Calculate total amount with 7% charge
     const total = hostNumber * menuPrice;
     const charge = (total * 7) / 100;
     setTotalAmount(total + charge);
   
-  }, [hostNumber, menuPrice,selectedOptions]);
-    
-
-   const downloadPdf = async() => {
-    if(!isLoggedIn){
-  const doc = new jsPDF();
-   doc.text(`Total: ${formattedTotal} Afghani`, 10, 10);
-   doc.text(`7% Charge: ${(totalAmount - (hostNumber * menuPrice)).toFixed(2).toLocaleUpperCase()} Afghani`, 10, 20);
-
-  let yPosition = 40;
-
-  if (selectedOptions) {
-    Object.keys(selectedOptions).forEach((day) => {
-      const date = new Date(day);
-      const formattedDate = format(date, 'yy/MM/dd'); // Format the date
-      console.log(`Date: ${formattedDate}, Status: ${selectedOptions[day]}`);
-       doc.text(`Date: ${formattedDate}, Status: ${selectedOptions[day]}`, 10, yPosition);
-      yPosition += 10;
-    });
-  }
-
-  doc.save("reservation.pdf");
-}else{
-  console.log('User is not logged in. PDF generation is not allowed.');
-}
-}
-;
-
+  }, [hostNumber, menuPrice]);
     
 
   return (
@@ -71,9 +42,12 @@ const Hosts = ({ hotel_name, menuPrice, selectedOptions }) => { // Remove the de
         />
         <br />
         <h4 className="price">
-          Total: {formattedTotal} {formattedTotal === "" ? "" : "Afghani"}
+        <h4 className="price">
+  Total: {guestAmount} {guestAmount === "" ? "" : "Afghani"}
+</h4>
+
         </h4>
-        <Link to={!isLoggedIn ? `/user/${userData._id}` : "/login"}className="reserv" onClick={downloadPdf}>
+        <Link to={!isLoggedIn ? `/user/${userData._id}` : "/login"}className="reserv" >
           Reserve Now
         </Link>
       </div>

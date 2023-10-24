@@ -1,14 +1,20 @@
 import {useState} from 'react';
 import {Link } from "react-router-dom";
 import { useLogged } from '../details/context';
+import {  faUser} from '@fortawesome/free-solid-svg-icons'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useUser } from '../details/userContext';
+import { useHotelDetail } from '../details/hotelContext';
 
 
 
 
 const Navbar = () =>{
+  const {hotelDetail} = useHotelDetail();
   const [isOpen, setIsOpen] = useState(true);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const { isLoggedIn } = useLogged();
+  const {userData} = useUser();
  
   const [selectedOption, setSelectedOption] = useState("English");
   const options = ['English', 'Dari', 'Pashto'];
@@ -59,6 +65,9 @@ return(<div className="navbar-page">
                 )}
               </div>
 
+              {!isLoggedIn ? <><Link style={{color:"#c97f08",fontSize:"24px", marginRight:"30px"}}to={`/user/${userData._id}`}> 
+    <FontAwesomeIcon icon={faUser} />
+   </Link></> : "" }
 
              
    {
@@ -68,11 +77,14 @@ return(<div className="navbar-page">
     <Link to="login" className="text-decoration-none me-3 button btn-md">Log In</Link>
     </> : null
    }
+   
    </div>  
         <div className="links">
             <Link to="/" className="routes d-none d-lg-inline  me-3" >Home</Link>
             <Link to="hotels" className="routes d-none   d-lg-inline me-3" >Hotels</Link>
+
             <Link to="contact" className= "routes d-none d-lg-inline  me-5" > Contact</Link>
+            
 
         </div>
         
