@@ -6,22 +6,34 @@ import { useGuestNumber } from "./guestAmountContext";
 import jsPDF from "jspdf";
 import { useHotelDetail } from "../details/hotelContext";
 import { useDayStatus } from "../details/dayStatusContext";
+import {useNavigate} from 'react-router-dom'
 
 const AllDetails = () =>{
     
-    const {userData} = useUser();
-    const {isLogged} = useLogged(); 
-    const {hotelDetail} = useHotelDetail();
-    const {selectedDate} = useSelectedDate();
-    const {selectedMenu} = useSelectedMenu();
-    const {guestAmount} = useGuestNumber();
-    const {dayStatus} = useDayStatus();
+    const {userData,setUserData} = useUser();
+    const {isLoggedIn,setIsLoggedIn} = useLogged(); 
+    const {hotelDetail,setHotelDetail} = useHotelDetail();
+    const {selectedDate,setSelectedDate} = useSelectedDate();
+    const {selectedMenu,setSelectedMenu} = useSelectedMenu();
+    const {guestAmount,setGuestAmount} = useGuestNumber();
+    const {dayStatus,setDayStatus} = useDayStatus();
+  const navigate = useNavigate(); 
+      
+  
+  const handleLogOut = () =>{
+    setUserData({});
+    setIsLoggedIn(true);
+    setHotelDetail();
+    setSelectedDate();
+    setSelectedMenu();
+    setGuestAmount();
+    setDayStatus();
+    navigate("/login");
+  }
 
-    console.log(selectedDate);
-    console.log(dayStatus)
 
     const downloadPdf = async() => {
-    if(!isLogged){
+    if(!isLoggedIn){
       const doc = new jsPDF();
         doc.text(`Name: ${userData.userName}`, 10,10);
         doc.text(`Phone Number: ${userData.userPhone}`, 10,20);
@@ -43,10 +55,11 @@ const AllDetails = () =>{
     }
     }
     return (<div className="text-center">
+      <button onClick={handleLogOut}>LogOut</button>
         <h1>All details</h1>
         <div className="mt-5">
             <h4>UserName: {userData.userName}</h4>
-            <h5>{!isLogged ? `Email:  ${userData.userEmail} ` : ""}</h5>
+            <h5>{!isLoggedIn ? `Email:  ${userData.userEmail} ` : ""}</h5>
             <h6>Selected Date: {selectedDate}</h6>
             <h1>Status: {dayStatus}</h1>
  
