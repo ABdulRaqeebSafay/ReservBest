@@ -75,11 +75,10 @@ const {values,touched ,handleChange,handleSubmit,errors} = useFormik({
          <>
                    
               
-                 <div className=" register signup row align-items-center ">
-                 <img className="col-lg-8 d-none d-sm-none d-lg-block signup" src="./photo5.jpg" />
+                 <div className=" signup row align-items-center ">
+                 <img className="col-lg-8 d-none d-sm-none d-lg-block picture" width="700" height="700" src="/Login-mockup.svg" />
 
-
-                    <form className="text-center col-lg-3 col-md-7 col-sm mx-2">
+                    <form className="text-center auth col-lg-3 col-md-7 col-sm mx-2">
 
                             
                        <h1 className="text-center mt-1 mb-5 welcome">LogIn Today ...!</h1>

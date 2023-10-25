@@ -22,8 +22,8 @@ const Calendar = () => {
   const [dropdownOpen, setDropdownOpen] = useState({});
 
   const handleOptionSelect = (day, option) => {
-    // Check if the option is "Booked" or "Pending"
-    if (option === 'booked' || option === 'pending') {
+    // Check if the option is "book" or "Pending"
+    if (option === 'book' || option === 'pending') {
       // If the checkbox is checked, allow selecting the option
       if (userMode) {
         setSelectedOptions((prevOptions) => ({
@@ -69,7 +69,7 @@ const Calendar = () => {
         >
           Previous
         </button>
-        <h4 style={{ color: "#c97f08" }}>{format(currentMonth, 'MMMM yyyy')}</h4>
+        <h5 style={{ color: "#c97f08" }}>{format(currentMonth, 'MMMM yyyy')}</h5>
         <button
           className="btn btn-md"
           style={{ backgroundColor: "#c97f08" }}
@@ -77,14 +77,12 @@ const Calendar = () => {
         >
           Next
         </button>
-        <label>
           <input
             type="checkbox"
             checked={userMode}
             onChange={() => setUserMode(!userMode)}
           />
-          User Mode
-        </label>
+         
       </div>
       <div className="calendar-grid">
         {daysInMonth.map((day) => (
@@ -96,17 +94,19 @@ const Calendar = () => {
           >
             <div className="dropdown">
               <button
-                className="btn btn-sm btn-info dropdown-toggle"
+                className="dropdown-toggle"
                 type="button"
                 id={`dropdownMenuButton${format(day, 'd')}`}
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 style={{
+                  fontSize:
+                  selectedOptions[day] === 'pending' ? '11px' : '14px',
                   backgroundColor:
-                    selectedOptions[day] === 'booked' ? 'red' :
+                    selectedOptions[day] === 'book' ? 'red' :
                     selectedOptions[day] === 'pending' ? 'gray' : '',
                 }}
-                disabled={userMode && (selectedOptions[day] === 'booked' || selectedOptions[day] === 'pending')}
+                disabled={userMode && (selectedOptions[day] === 'book' || selectedOptions[day] === 'pending')}
               >
                 {selectedOptions[day] || format(day, 'd')}
               </button>
@@ -117,7 +117,7 @@ const Calendar = () => {
                       (!userMode && (selectedOptions[day] === format(day, 'd') || selectedOptions[day] === undefined)) ? '' : ''
                     }`}
                     onClick={() => handleOptionSelect(day, format(day, 'd'))}
-                    disabled={userMode && (selectedOptions[day] === 'booked' || selectedOptions[day] === 'pending')}
+                    disabled={userMode && (selectedOptions[day] === 'book' || selectedOptions[day] === 'pending')}
                   >
                     {format(day, 'd')}
                   </button>
@@ -125,27 +125,27 @@ const Calendar = () => {
                 <li>
                   <button
                     className={`dropdown-item ${
-                      (!userMode || (userMode && (selectedOptions[day] === 'booked' || selectedOptions[day] === 'pending')) ||
-                      (selectedOptions[day] === 'booked' && !userMode)
+                      (!userMode || (userMode && (selectedOptions[day] === 'book' || selectedOptions[day] === 'pending')) ||
+                      (selectedOptions[day] === 'book' && !userMode)
                     ) ? 'active' : ''
                     }`}
-                    onClick={() => handleOptionSelect(day, 'booked')}
+                    onClick={() => handleOptionSelect(day, 'book')}
                     disabled={userMode && selectedOptions[day] === 'pending'}
                   >
-                    Booked
+                    book
                   </button>
                 </li>
                 <li>
                   <button
                     className={`dropdown-item ${
-                      (!userMode || (userMode && (selectedOptions[day] === 'booked' || selectedOptions[day] === 'pending')) ||
+                      (!userMode || (userMode && (selectedOptions[day] === 'book' || selectedOptions[day] === 'pending')) ||
                       (selectedOptions[day] === 'pending' && !userMode)
                     ) ? 'active' : ''
                     }`}
                     onClick={() => handleOptionSelect(day, 'pending')}
-                    disabled={userMode && selectedOptions[day] === 'booked'}
+                    disabled={userMode && selectedOptions[day] === 'book'}
                   >
-                    Pending
+                  Pending 
                   </button>
                 </li>
               </ul>

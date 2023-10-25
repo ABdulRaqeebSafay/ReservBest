@@ -236,15 +236,16 @@ transition:border-bottom 1s ease-in;
   color: #aaa;
 }
 .dropdown-toggle{
-  width: 60px; 
-  height: 60px;
+  width: 50px; 
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 10px;
   font-size:14px;
-  background:#d8952a
+  background:#c97f08;
+  border:none;
 }
 .register-inputes{
 
@@ -279,10 +280,26 @@ transition:border-bottom 1s ease-in;
   height:100vh;
   width:100.8%;
   background-color: rgb(255, 252, 252);
- 
  overflow-y:hidden;
 }
+.auth,.register{
+  background-color: rgba(149, 144, 144,0.1234);
+  border-radius:20px;
+  padding:20px;
+  box-shadow: 0 2px 4px #c97f08;
+
+}
+.auth{
+  width:600px;
+  height:400px;
+}
+.register{
+  width:500px;
+  height:500px;
+}
+
 .welcome,.create-account,.question{
+  
   color:#c97f08;
   
 }
@@ -291,26 +308,7 @@ transition:border-bottom 1s ease-in;
 
 }
 @media (max-width: 991px) {
-  .register{
-    background-image: url('./photo5.jpg'); 
-    background-size: cover; 
-    position: relative;
-    background-repeat: no-repeat; 
-    background-position: center;
-     z-index:100;    
-     overflow:hidden;
-     
 
-  }
-  .register::after{
-    content:'';
-    position:absolute;
-    width:100%;
-    height:100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: -1000000000;
-    
-  }
   .welcome,.create-account{
     color:rgb(236, 230, 230);;
   }
@@ -329,7 +327,15 @@ transition:border-bottom 1s ease-in;
   position:absolute;
   right:10%;
   top:100px;
- 
+ width:550px;
+ user-select: none;
+-webkit-user-drag: none;
+
+}
+.picture{
+  
+ user-select: none;
+-webkit-user-drag: none;
 }
 
 .get-started{

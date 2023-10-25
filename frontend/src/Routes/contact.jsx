@@ -37,8 +37,10 @@ const Contact = () =>{
 
     return(
         <>
-         <div className="contact-page">
-      <div className="contact-content">
+         <div className="contact-page row "  style={{paddingTop:"80px"}}>
+      <img src="/contact.svg" className="col picture" width="600" height="600"/>
+
+      <div className="contact-content col">
         <h2 className="text-center">Contact Us</h2>
          <p className="text-center">Have questions or feedback? We would love to hear from you.</p>
 

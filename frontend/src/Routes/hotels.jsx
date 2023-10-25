@@ -36,8 +36,9 @@ const Hotels = () => {
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+  
   };
-
+  
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -46,15 +47,15 @@ const Hotels = () => {
     const regex = new RegExp(searchQuery, 'i');
     const matchingHotels = hotels.filter((hotel) =>
       regex.test(hotel.hotelName)
-    );
-
-    setHotels(matchingHotels);
-
-    if (matchingHotels.length === 0) {
-      setSearchResultMessage("We haven't added this hotel in our database yet.");
-    } else {
-      setSearchResultMessage('');
-    }
+      );
+      setHotels(matchingHotels);
+    //   if (matchingHotels.length === 0) {
+    //     setSearchResultMessage("We haven't added this hotel in our database yet.");
+    //     setSearchQuery("");
+    // } else {
+    //   setSearchResultMessage('');
+    //   setSearchQuery("")
+    // }
   };
 
   const handleClearSearch = () => {
@@ -216,9 +217,9 @@ const Hotels = () => {
         {renderPaginationButtons()}
       </div>
       
-      {searchResultMessage && (
-        <h1 className="text-center mt-3" style={{color:"#c97f08"}}>{searchResultMessage}</h1>
-      )}
+        {/* {searchResultMessage && (
+          <h1 className="text-center mt-3" style={{color:"#c97f08"}}>{searchResultMessage}</h1>
+        )} */}
     </div>
   );
 };
