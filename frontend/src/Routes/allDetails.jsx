@@ -7,6 +7,8 @@ import jsPDF from "jspdf";
 import { useHotelDetail } from "../details/hotelContext";
 import { useDayStatus } from "../details/dayStatusContext";
 import {useNavigate} from 'react-router-dom'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {  faSignOut, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const AllDetails = () =>{
     
@@ -55,7 +57,8 @@ const AllDetails = () =>{
     }
     }
     return (<div className="text-center">
-      <button onClick={handleLogOut}>LogOut</button>
+      <i style={{cursor:"pointer"}} className="float-end me-5 cursor-pointer" onClick={handleLogOut}><FontAwesomeIcon icon={faSignOut} size="xl" /></i>
+      {/* <i className="float-end me-5" ><FontAwesomeIcon icon={faSpinner} transform="left-1"  spin/></i> */}
         <h1>All details</h1>
         <div className="mt-5">
             <h4>UserName: {userData.userName}</h4>

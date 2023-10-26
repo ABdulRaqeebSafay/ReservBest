@@ -22,7 +22,10 @@ color:#c97f08;
   min-height:100vh;
   width:100%;
   height:100%;
-
+}
+.skeleton{
+  width:100%;
+  height:200px;
 }
 h5{
 color:#c97f08;
@@ -259,11 +262,9 @@ transition:border-bottom 1s ease-in;
 .register-inputes:active{
   border:1px solid#c97f08;
 }
-
-
 .button{
   color:#c97f08;
-  background:rgb(236, 230, 230);;
+  background:rgb(236, 230, 230);
   border:1px solid #c97f08;
   border-radius:5px;
   padding:8px;
@@ -292,6 +293,7 @@ transition:border-bottom 1s ease-in;
 .auth{
   width:600px;
   height:400px;
+  
 }
 .register{
   width:500px;
