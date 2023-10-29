@@ -6,6 +6,7 @@ import MenuGrade1 from '../Models/menuGrade1.js';
 import MenuGrade2 from '../Models/menuGrade2.js';
 import MenuGrade3 from '../Models/menuGrade3.js';
 import User from "../Models/userScheema.js";
+import reservationModel from "../Models/reservation.js";
 import emailVerifier from 'email-verify';
 
 
@@ -89,7 +90,7 @@ static async login(req, res) {
 
   if (user) {
     if (user.userPassword === userPassword) {
-      const { userEmail, _id, userName, userPhone } = user; // Include userName and userPhone
+      const { userEmail, _id, userName, userPhone } = user;
       res.json({ message: "success", body: { userEmail, _id, userName, userPhone } });
     } else {
       res.send("Password is incorrect");
@@ -171,6 +172,18 @@ static async login(req, res) {
       console.error("Error saving to-do item:", error);
       res.status(500).send("Internal Server Error");
     }
+  }
+
+  static async reservationDetails(req,res){
+    try {
+      const {userId, userName,userEmail, hotelName,reservedMenu,reservedDate,reservedStatus,reservedGuestsAmount,totalPrice} = req.body;
+      const reservationDetails = await reservationModel.create( {userId, userName,userEmail, hotelName,reservedMenu,reservedDate,reservedStatus,reservedGuestsAmount,totalPrice});
+      res.send(reservationDetails);
+      console.log(reservationDetails);
+    } catch (error) {
+      console.error("Error saving to-do item:", error);
+      res.status(500).send("Internal Server Error");
+    } 
   }
 }
 

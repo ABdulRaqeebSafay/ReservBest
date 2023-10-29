@@ -1,23 +1,49 @@
 import {useState} from 'react';
-import {Link } from "react-router-dom";
-import { useLogged } from '../details/context';
-import {  faUser} from '@fortawesome/free-solid-svg-icons'; 
+import {Link,useNavigate } from "react-router-dom";
+import {  faUser,faSignOut} from '@fortawesome/free-solid-svg-icons'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useUser } from '../details/userContext';
-import { useHotelDetail } from '../details/hotelContext';
+import { useLogged } from "../contexts/context";
+import { useUser } from "../contexts/userContext";
+import {useSelectedDate} from '../contexts/calendarContext';
+import { useSelectedMenu } from "../contexts/menuContext";
+import { useTotalPrice } from "../contexts/totalPriceContext";
+import { useHotelDetail } from "../contexts/hotelContext";
+import { useDayStatus } from "../contexts/dayStatusContext";
+
 
 
 
 
 const Navbar = () =>{
-  const {hotelDetail} = useHotelDetail();
+ 
   const [isOpen, setIsOpen] = useState(true);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const { isLoggedIn } = useLogged();
-  const {userData} = useUser();
+
+  const { userData, setUserData } = useUser();
+  const { isLoggedIn, setIsLoggedIn } = useLogged();
+  const { hotelDetail, setHotelDetail } = useHotelDetail();
+  const { selectedDate, setSelectedDate } = useSelectedDate();
+  const { selectedMenu, setSelectedMenu } = useSelectedMenu();
+  const { totalPrice, setTotalPrice } = useTotalPrice();
+  const { dayStatus, setDayStatus } = useDayStatus();
  
   const [selectedOption, setSelectedOption] = useState("English");
   const options = ['English', 'Dari', 'Pashto'];
+  const navigate = useNavigate();
+
+
+
+
+const handleLogOut = () =>{
+    setUserData({});
+    setIsLoggedIn(true);
+    setHotelDetail();
+    setSelectedDate();
+    setSelectedMenu();
+    setTotalPrice();
+    setDayStatus();
+    navigate("/login");
+  }
 
   const toggleDropdown = () => {
     setIsOpenMenu(!isOpenMenu);
@@ -27,6 +53,8 @@ const Navbar = () =>{
     setSelectedOption(option);
     setIsOpenMenu(false);
   };
+  
+  
   
 
 const toggleMenu = () => {
@@ -48,7 +76,7 @@ return(<div className="navbar-page">
 </div>
         <div className="langs mt-2">
                             
-              <div className="custom-dropdown languages float-end">
+              {/* <div className="custom-dropdown languages float-end">
                 <div className="dropdown-header" onClick={toggleDropdown}>
                  <p style={{fontSize:"18px",display:"inline"}}>{selectedOption}</p>
                   <i className={`arrow ms-4 ${isOpenMenu ? 'open-menu' : 'd-none'}`} > &#9650;</i>
@@ -63,11 +91,17 @@ return(<div className="navbar-page">
                     ))}
                   </ul>
                 )}
-              </div>
+              </div> */}
 
-              {!isLoggedIn ? <><Link style={{color:"#c97f08",fontSize:"24px", marginRight:"30px"}}to={`/user/${userData._id}`}> 
-    <FontAwesomeIcon icon={faUser} />
-   </Link></> : "" }
+              {!isLoggedIn ? <>
+                  <Link style={{color:"#c97f08",fontSize:"24px", marginRight:"30px"}}to={`/user/${userData._id}`}> 
+                    <FontAwesomeIcon icon={faUser} />
+                  </Link> 
+                    <i style={{ cursor: "pointer", color: "#c97f08",fontSize:"20px", marginRight:"30px" }}      className="" onClick={handleLogOut}>
+                    <FontAwesomeIcon icon={faSignOut} size="xl" />
+                  </i>  </>: ""
+                
+   }
 
              
    {

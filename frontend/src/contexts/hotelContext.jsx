@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 const HotelContext = createContext();
 
 export function UserProvider({ children }) {
-  const [hotelDetail, setHotelDetail] = useState([]);
+  const [hotelDetail, setHotelDetail] = useState(null);
 
   return (
     <HotelContext.Provider value={{ hotelDetail, setHotelDetail }}>

@@ -1,31 +1,33 @@
-// Hosts.js
+
 import { useState, useEffect } from "react";
-
-import { useLogged } from '../details/context';
+import { useLogged } from '../contexts/context';
 import { Link } from "react-router-dom"; 
-import { useUser } from "./userContext";
-import { useGuestNumber } from "../Routes/guestAmountContext";
+import { useUser } from "../contexts/userContext";
+import { useTotalPrice } from "../contexts/totalPriceContext";
+import { useGuestAmount } from "../contexts/guestAmountContext";
+import AllDetails from "../Routes/allDetails";
 
-
-const Hosts = ({ hotel_name, menuPrice, }) => { // Remove the default value
+const Hosts = ({ hotel_name, menuPrice, }) => {
   
   const [hostNumber, setHostNumber] = useState();
+  const {guestAmount, setGuestAmount} = useGuestAmount(); 
   const [totalAmount,setTotalAmount] = useState(0);
   const { isLoggedIn } = useLogged();
   const {userData} = useUser();
-  const {guestAmount,setGuestAmount} = useGuestNumber();
+  const {totalPrice,setTotalPrice} = useTotalPrice();
 
 
 
 
   useEffect(() => {
-  setGuestAmount(hostNumber * menuPrice);
-    // Calculate total amount with 7% charge
+
+  setTotalPrice(guestAmount * menuPrice);
+    console.log(userData)
     const total = hostNumber * menuPrice;
     const charge = (total * 7) / 100;
     setTotalAmount(total + charge);
   
-  }, [hostNumber, menuPrice]);
+  }, [totalPrice,guestAmount, menuPrice]);
     
 
   return (
@@ -36,19 +38,19 @@ const Hosts = ({ hotel_name, menuPrice, }) => { // Remove the default value
         </label>
         <input
           type="number"
-          onChange={(e) => setHostNumber(e.target.value)}
+          onChange={(e) => setGuestAmount(e.target.value)}
           className=""
           placeholder="Number of hosts e.g: 500"
         />
         <br />
         <h4 className="price">
         <h4 className="price">
-  Total: {guestAmount} {guestAmount === "" ? "" : "Afghani"}
+       Total: {totalPrice} {totalPrice === "" ? "" : "Afghani"}
 </h4>
 
         </h4>
         <Link to={!isLoggedIn ? `/user/${userData._id}` : "/login"}className="reserv" >
-          Reserve Now
+          <AllDetails />
         </Link>
       </div>
     </>

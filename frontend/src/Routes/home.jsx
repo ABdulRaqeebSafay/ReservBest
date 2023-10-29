@@ -3,19 +3,6 @@ import {Link} from 'react-router-dom'
 import TypingAnimation from '../typingAnimation';
 
 const Home = () => {
-  
-  useEffect(() => {
-    
-    startAnimation();
-  }, []);
-
-  const startAnimation = () => {
-
-    setTimeout(() => {
-      
-      console.log('Animation completed');
-    }, 4000);
-  };
 
   return (
     <div className="home">

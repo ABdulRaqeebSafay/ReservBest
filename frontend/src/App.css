@@ -214,7 +214,12 @@ transition:border-bottom 1s ease-in;
   margin: 0 auto;
 }
 .buttons{
-  background:#c97f08; 
+  background:rgb(201, 127, 8); 
+  width:100%;
+  padding:10px;
+  border-radius:4px;
+  color:white;
+  text-decoration:none;
 }
 
 .calendar-header {
@@ -554,4 +559,58 @@ th, td {
 
 th {
   background-color: #f2f2f2;
+}
+
+
+/* DIALOG BOX STYLE */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+
+.confirmation-dialog {
+  background-color: rgb(201, 127, 8);
+  position: fixed;
+  width: 400px;
+  height: 150px;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.confirmation-dialog p {
+  font-size: 22px;
+  display:block
+}
+
+.confirmation-dialog button {
+  background-color: white;
+  color: #c97f08;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+.confirmation-dialog button:hover {
+  background-color: white;
 }

@@ -5,7 +5,7 @@ import { createContext, useContext, useState } from 'react';
 const GuestAmountContext = createContext();
 
 export function UserProvider({ children }) {
-  const [guestAmount, setGuestAmount] = useState();
+  const [guestAmount,setGuestAmount] = useState(0);
 
   return (
     <GuestAmountContext.Provider value={{ guestAmount, setGuestAmount
@@ -15,6 +15,6 @@ export function UserProvider({ children }) {
   );
 }
 
-export function useGuestNumber() {
+export function useGuestAmount() {
   return useContext(GuestAmountContext);
 }

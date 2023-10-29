@@ -8,8 +8,8 @@ import MenuGradeOne from '../details/menuGradeOne';
 import MenuGradeTwo from '../details/menuGradeTwo';
 import MenuGradeThree from '../details/menuGradeThree';
 import Calendar from '../calendar';
-import { useSelectedMenu } from '../details/menuContext';
-import { useHotelDetail } from '../details/hotelContext';
+import { useSelectedMenu } from '../contexts/menuContext';
+import { useHotelDetail } from '../contexts/hotelContext';
 
 const BookingPage = () => {
   const { hotel_name } = useParams();
@@ -27,8 +27,7 @@ const BookingPage = () => {
   ];
 
   const handleMenuChange = (menuLabel) => {
-    // Log the selected menu label to the console
-    setSelectedMenu(`Selected menu: ${menuLabel}`);
+    setSelectedMenu(menuLabel);
     setcurrentMenu(menuLabel);
   };
   useEffect(()=>{

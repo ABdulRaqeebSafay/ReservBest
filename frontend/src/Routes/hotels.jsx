@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { useHotelImage } from '../contexts/hotelImageContext';
 
 
 const Hotels = () => {
@@ -14,6 +15,7 @@ const Hotels = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState(''); 
   const [searchResultMessage, setSearchResultMessage] = useState(""); 
+  const {hotelImage,setHotelImage} = useHotelImage();
   const itemsPerPage = 6; 
   const baseUrl = 'http://localhost:5000';
 
@@ -22,8 +24,8 @@ const Hotels = () => {
       .get(`${baseUrl}/hotels`)
       .then((response) => {
         setHotels(response.data);
+
         setIsLoading(false);
-        
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -49,13 +51,7 @@ const Hotels = () => {
       regex.test(hotel.hotelName)
       );
       setHotels(matchingHotels);
-    //   if (matchingHotels.length === 0) {
-    //     setSearchResultMessage("We haven't added this hotel in our database yet.");
-    //     setSearchQuery("");
-    // } else {
-    //   setSearchResultMessage('');
-    //   setSearchQuery("")
-    // }
+   
   };
 
   const handleClearSearch = () => {

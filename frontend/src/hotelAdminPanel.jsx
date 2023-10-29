@@ -1,12 +1,12 @@
 import Calendar from "./calendar"
 // import AllDetails from "./Routes/allDetails";
 
-import { useUser } from "./details/userContext";
-import {useSelectedDate} from './details/calendarContext';
-import { useSelectedMenu } from "./details/menuContext";
-import { useGuestNumber } from "./Routes/guestAmountContext";
+import { useUser } from "./contexts/userContext";
+import {useSelectedDate} from './contexts/calendarContext';
+import { useSelectedMenu } from "./contexts/menuContext";
+import {  useTotalPrice } from "./contexts/totalPriceContext";
 
-import { useHotelDetail } from "./details/hotelContext";
+import { useHotelDetail } from "./contexts/hotelContext";
 
 const HotelAdminPanel = () => {
 
@@ -16,7 +16,7 @@ const HotelAdminPanel = () => {
       const {hotelDetail} = useHotelDetail();
       const {selectedDate} = useSelectedDate();
       const {selectedMenu} = useSelectedMenu();
-      const {guestAmount} = useGuestNumber();
+      const {totalPrice} = useTotalPrice();
       let id = 1;
       
   
@@ -47,7 +47,7 @@ const HotelAdminPanel = () => {
               <td>500</td>
               <td>pnding</td>
               <td>{selectedDate}</td>
-              <td>{guestAmount}</td>
+              <td>{totalPrice}</td>
               
             </tr>
      

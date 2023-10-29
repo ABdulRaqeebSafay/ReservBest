@@ -6,8 +6,8 @@ import { useFormik } from "formik";
 import * as yup from 'yup'
 import { useState} from 'react'
 import axios from "axios";
-import { useLogged } from '../details/context';
-import {useUser} from '../details/userContext';
+import { useLogged } from '../contexts/context';
+import {useUser} from '../contexts/userContext';
 
 
 
@@ -32,9 +32,8 @@ const Login = () => {
       console.log(response.data);
     
     if (response.data.message === "success") {
-      // Set user data in context
+      
       setUserData(response.data.body); 
-      // history.push(`/user/${response.data.body._id}`);/
       setIsLoggedIn(false);
       navigate(`/user/${response.data.body._id}`);
     }

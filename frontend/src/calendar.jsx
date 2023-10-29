@@ -1,7 +1,7 @@
 import  { useState } from 'react';
 import { startOfMonth, addDays, format, isSameMonth, isToday } from 'date-fns';
-import { useSelectedDate } from './details/calendarContext';
-import { useDayStatus } from './details/dayStatusContext';
+import { useSelectedDate } from './contexts/calendarContext';
+import { useDayStatus } from './contexts/dayStatusContext';
 
 
 const Calendar = () => {
