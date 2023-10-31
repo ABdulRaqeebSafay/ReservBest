@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { useHotelImage } from '../contexts/hotelImageContext';
+
 
 
 const Hotels = () => {
@@ -14,8 +14,9 @@ const Hotels = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState(''); 
-  const [searchResultMessage, setSearchResultMessage] = useState(""); 
-  const {hotelImage,setHotelImage} = useHotelImage();
+  const [ setSearchResultMessage] = useState(""); 
+  
+
   const itemsPerPage = 6; 
   const baseUrl = 'http://localhost:5000';
 
@@ -24,7 +25,7 @@ const Hotels = () => {
       .get(`${baseUrl}/hotels`)
       .then((response) => {
         setHotels(response.data);
-
+        
         setIsLoading(false);
       })
       .catch((error) => {

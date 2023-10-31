@@ -7,12 +7,7 @@ import {useState} from 'react'
 import * as yup from 'yup'
 import axios from "axios";
 
-
-
-
-
 const Signup = () =>{
-
 
     let navigate = useNavigate();
 
@@ -41,8 +36,8 @@ const Signup = () =>{
             setData("This email is already registered.");
           } else {
             console.log(`User ${values.email} is registered.`);
-            setData(""); // Clear the error message
-            navigate("/login"); // Navigate to the login page
+            setData(""); 
+            navigate("/login"); 
           }
         })
         .catch((e) => {
@@ -62,7 +57,6 @@ const {values,touched ,handleChange,handleSubmit,errors} = useFormik({
   validationSchema:schema,
   onSubmit,
 });
-
 
 
     return(

@@ -1,25 +1,12 @@
-// import{useRef} from 'react';
-// import emailjs from '@emailjs/browser'
+
 import * as yup from 'yup';
-// import { Form } from 'formik';
+
 import { useFormik } from 'formik';
 
 
 const Contact = () =>{
 
-    
 
-    // const sendEmail = (e) => {
-    //   e.preventDefault();
-  
-    //   emailjs.sendForm('service_26umlrt', 'template_89p0tjf', form.current, 'LW3r27bFaCZINQrEn')
-    //     .then((result) => {
-    //         console.log(result.text);
-    //         console.log('message sent')
-    //     }, (error) => {
-    //         console.log(error.text);
-    //     });
-    // };
     let schema = yup.object( {
         user_email:yup.string().email('please enter a valid email').required('email is required field *'),
         user_name:yup.string().required('name is required field *').min(3,'name must be at least 3 number').max(10,'name is too longer'),

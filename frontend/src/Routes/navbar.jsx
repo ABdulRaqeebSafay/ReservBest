@@ -17,18 +17,18 @@ import { useDayStatus } from "../contexts/dayStatusContext";
 const Navbar = () =>{
  
   const [isOpen, setIsOpen] = useState(true);
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  // const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   const { userData, setUserData } = useUser();
   const { isLoggedIn, setIsLoggedIn } = useLogged();
-  const { hotelDetail, setHotelDetail } = useHotelDetail();
-  const { selectedDate, setSelectedDate } = useSelectedDate();
-  const { selectedMenu, setSelectedMenu } = useSelectedMenu();
-  const { totalPrice, setTotalPrice } = useTotalPrice();
-  const { dayStatus, setDayStatus } = useDayStatus();
+  const {setHotelDetail } = useHotelDetail();
+  const { setSelectedDate } = useSelectedDate();
+  const { setSelectedMenu } = useSelectedMenu();
+  const { setTotalPrice } = useTotalPrice();
+  const {setDayStatus } = useDayStatus();
  
-  const [selectedOption, setSelectedOption] = useState("English");
-  const options = ['English', 'Dari', 'Pashto'];
+  // const [ setSelectedOption] = useState("English");
+  // const options = ['English', 'Dari', 'Pashto'];
   const navigate = useNavigate();
 
 
@@ -45,14 +45,14 @@ const handleLogOut = () =>{
     navigate("/login");
   }
 
-  const toggleDropdown = () => {
-    setIsOpenMenu(!isOpenMenu);
-  };
+  // const toggleDropdown = () => {
+  //   setIsOpenMenu(!isOpenMenu);
+  // };
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setIsOpenMenu(false);
-  };
+  // const handleOptionClick = (option) => {
+  //   setSelectedOption(option);
+  //   setIsOpenMenu(false);
+  // };
   
   
   

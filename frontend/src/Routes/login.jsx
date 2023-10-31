@@ -1,7 +1,7 @@
 
 
 import { useNavigate,Link } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
+
 import { useFormik } from "formik";
 import * as yup from 'yup'
 import { useState} from 'react'
@@ -13,7 +13,7 @@ import {useUser} from '../contexts/userContext';
 
 const Login = () => {
   const {setUserData} = useUser();
-  // const history = useHistory();
+  
   
   const [data, setData] = useState();
   const {  setIsLoggedIn } = useLogged();
@@ -52,33 +52,13 @@ const {values,touched ,handleChange,handleSubmit,errors} = useFormik({
   onSubmit,
 });
 
-// useEffect(() => {
-//   // Block navigation to the login page from the dashboard
-//   const unblock = history.block((location, action) => {
-//     if (location.pathname === '/login' && action === 'POP') {
-//       history.push('/'); // Redirect to the home page
-//       return false; // Prevent the navigation
-//     }
-//     else if( location.pathname === '/hotels/:hotel_name' && action === 'POP'){
-//       history.push('/hotels')
-//       return true;
-//     }
-//   });
-
-//   return () => {
-//     unblock(); // Unregister the blocking when the component unmounts
-//   };
-// }, [history]);
-
     return(
          <>
-                   
-              
+                  
                  <div className=" signup row align-items-center ">
                  <img className="col-lg-8 d-none d-sm-none d-lg-block picture" width="700" height="700" src="/Login-mockup.svg" />
 
                     <form className="text-center auth col-lg-3 col-md-7 col-sm mx-2">
-
                             
                        <h1 className="text-center mt-1 mb-5 welcome">LogIn Today ...!</h1>
            

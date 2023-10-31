@@ -10,7 +10,7 @@ const Calendar = () => {
   const {setSelectedDate} = useSelectedDate();
   const {setDayStatus} = useDayStatus();
   const [currentMonth, setCurrentMonth] = useState(today);
-  const [userMode, setUserMode] = useState(false); // Default is admin mode
+  const [userMode, setUserMode] = useState(false); 
 
   const startDate = startOfMonth(currentMonth);
   const daysInMonth = Array.from({ length: 42 }, (_, index) =>
@@ -19,19 +19,19 @@ const Calendar = () => {
 
   
   const [selectedOptions, setSelectedOptions] = useState({});
-  const [dropdownOpen, setDropdownOpen] = useState({});
+  const [ dropDownOpen,setDropdownOpen] = useState({});
 
   const handleOptionSelect = (day, option) => {
-    // Check if the option is "book" or "Pending"
+    
     if (option === 'book' || option === 'pending') {
-      // If the checkbox is checked, allow selecting the option
+      
       if (userMode) {
         setSelectedOptions((prevOptions) => ({
           ...prevOptions,
           [day]: option,
         }));
   
-        // Close the dropdown menu for the selected date
+        
         setDropdownOpen((prevDropdownState) => ({
           ...prevDropdownState,
           [day]: false,
@@ -41,13 +41,13 @@ const Calendar = () => {
         setDayStatus(option)
       }
     } else {
-      // For date options, always allow selection
+      
       setSelectedOptions((prevOptions) => ({
         ...prevOptions,
         [day]: option,
       }));
   
-      // Close the dropdown menu for the selected date
+      
       setDropdownOpen((prevDropdownState) => ({
         ...prevDropdownState,
         [day]: false,

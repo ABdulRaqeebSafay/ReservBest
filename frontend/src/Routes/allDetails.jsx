@@ -1,4 +1,4 @@
-import React from 'react';
+
 import axios from 'axios';
 import { useUser } from "../contexts/userContext";
 import { useSelectedMenu } from "../contexts/menuContext";
@@ -17,12 +17,12 @@ const AllDetails = () => {
   const totalPrice = useTotalPrice();
   const selectedDate = useSelectedDate();
   const dayStatus = useDayStatus();
-  const {isLoggedIn,setIsLoggedIn} = useLogged();
+  const {isLoggedIn} = useLogged();
 
   const reservHotel = () => {
+    
     if (!isLoggedIn) {
-      
-      console.log("request sended now")
+
       axios
         .post('http://localhost:5000/reservationDetails', {
           userId: userData._id,
@@ -35,8 +35,8 @@ const AllDetails = () => {
           reservedGuestsAmount: guestAmount.guestAmount,
           totalPrice: totalPrice.totalPrice,
         })
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
+          
         })
         .catch((err) => {
           console.log(err.message);
@@ -48,7 +48,7 @@ const AllDetails = () => {
 
   return (
     <div>
-      <button onClick={reservHotel}>Reserve Hotel</button>
+      <button className="reserv" onClick={reservHotel}>Reserve Hotel</button>
     </div>
   );
 };

@@ -9,7 +9,7 @@ import AllDetails from "../Routes/allDetails";
 
 const Hosts = ({ hotel_name, menuPrice, }) => {
   
-  const [hostNumber, setHostNumber] = useState();
+  const [hostNumber] = useState();
   const {guestAmount, setGuestAmount} = useGuestAmount(); 
   const [totalAmount,setTotalAmount] = useState(0);
   const { isLoggedIn } = useLogged();
@@ -22,7 +22,7 @@ const Hosts = ({ hotel_name, menuPrice, }) => {
   useEffect(() => {
 
   setTotalPrice(guestAmount * menuPrice);
-    console.log(userData)
+    
     const total = hostNumber * menuPrice;
     const charge = (total * 7) / 100;
     setTotalAmount(total + charge);
@@ -32,8 +32,8 @@ const Hosts = ({ hotel_name, menuPrice, }) => {
 
   return (
     <>
-      <div className="mt-5 px-5 sticky-top d-flex justify-content-between">
-        <label htmlFor="" className="price my-3">
+      <div className="mt-5 px-2 sticky-top d-flex justify-content-between">
+        <label htmlFor="" className="my-3">
           {menuPrice} Afghani Per Person
         </label>
         <input
@@ -43,13 +43,13 @@ const Hosts = ({ hotel_name, menuPrice, }) => {
           placeholder="Number of hosts e.g: 500"
         />
         <br />
-        <h4 className="price">
-        <h4 className="price">
-       Total: {totalPrice} {totalPrice === "" ? "" : "Afghani"}
-</h4>
+        
+        <h6 className="price">
+       Total: {totalPrice} {totalPrice === 0 ? "" : "Afghani"}    
+       </h6>
 
-        </h4>
-        <Link to={!isLoggedIn ? `/user/${userData._id}` : "/login"}className="reserv" >
+        
+        <Link to={!isLoggedIn ? `/user/${userData._id}` : "/login"}className="" >
           <AllDetails />
         </Link>
       </div>

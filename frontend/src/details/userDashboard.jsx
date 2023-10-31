@@ -1,58 +1,102 @@
 import { useLogged } from "../contexts/context";
 import { useUser } from "../contexts/userContext";
-import {useSelectedDate} from '../contexts/calendarContext';
-import { useSelectedMenu } from "../contexts/menuContext";
-import { useTotalPrice } from "../contexts/totalPriceContext";
-import { useHotelDetail } from "../contexts/hotelContext";
-import { useDayStatus } from "../contexts/dayStatusContext";
 
 
 import {useEffect,useState} from 'react';
 import axios from 'axios'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faSignOut, faSpinner,faCheck,faHotel,faPeopleGroup, faCalendar, faMoneyBill, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner,faCheck,faHotel,faPeopleGroup, faCalendar, faMoneyBill, faBars } from "@fortawesome/free-solid-svg-icons";
 import jsPDF from "jspdf";
 
 const UserDashboard = () =>{
-  const { userData,      setUserData      } = useUser();
-  const { isLoggedIn,    setIsLoggedIn    } = useLogged();
-  const { hotelDetail,   setHotelDetail   } = useHotelDetail();
-  const { selectedDate,   setSelectedDate  } = useSelectedDate();
-  const { selectedMenu,   setSelectedMenu  } = useSelectedMenu();
-  const { totalPrice,     setTotalPrice    } = useTotalPrice();
-  const { dayStatus,      setDayStatus    } = useDayStatus();
+  const { userData  } = useUser();
+  const { isLoggedIn  } = useLogged();
+  
+
   
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
   const [reservationIdToDelete, setReservationIdToDelete] = useState(null);
 
 
   const [filteredReservationDetails, setFilteredReservationDetails] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // State for the spinner
+  const [isLoading, setIsLoading] = useState(true); 
   
-  
-    const downloadPdf = async(userName,hotelName,totalPrice,reservedDate,reservedMenu,reservedStatus,reservedGuestsAmount) => {
-    if(!isLoggedIn){
-      const doc = new jsPDF();
-        doc.text(`Name: ${userName}`, 10,10);
-        doc.text(`Hotel Name: ${hotelName}`, 10, 20)
-        doc.text(`Hotel Name: ${reservedGuestsAmount}`, 10, 30)
-        // doc.text(`Phone Number: ${userData.userPhone}`, 10,20);
-       doc.text(`Total: ${totalPrice} Afghani`, 10, 40);
-       doc.text(`7 % charge: ${(totalPrice * 7) / 100} Afghani`, 10, 50);
-       doc.text(`Selected Date: ${reservedDate}`, 10, 60);
-       doc.text(`Status: ${reservedStatus}`, 10, 70);
-       doc.text(`Selected Menu: ${reservedMenu}`, 10, 80);
+  const downloadPdf = async(userName, hotelName, totalPrice, year,month,day, reservedMenu, reservedStatus, reservedGuestsAmount) => {
+    if (!isLoggedIn) {
+        const doc = new jsPDF();
 
-       doc.save("reservation.pdf");
-      }
-    else{
-      console.log('User is not logged in. PDF generation is not allowed.');
+        doc.setFillColor("#ccc");
+        doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
+
+        doc.setTextColor(0, 0, 0);
+
+        doc.setFontSize(12);
+
+        const totalBorderWidth = 1; 
+        const border1Width = totalBorderWidth / 2; 
+        const border2Width = totalBorderWidth / 2.5; 
+        const padding = 10;
+        const repaidAmount = 70000;
+        const pageWidth = doc.internal.pageSize.width;
+        const pageHeight = doc.internal.pageSize.height;
+        
+      
+        doc.setDrawColor("#c97f08"); 
+        doc.setLineWidth(border1Width);
+        doc.rect(padding, padding, pageWidth - 2 * padding, pageHeight - 2 * padding);
+        
+        doc.setDrawColor("#c97f08"); 
+        doc.setLineWidth(border2Width);
+        doc.rect(padding + border1Width, padding + border1Width, pageWidth - 2 * (padding + border1Width), pageHeight - 2 * (padding + border1Width));
+        
+
+        doc.setFontSize(14);
+        doc.text(` ${hotelName} Final Reservation Paper`, 50, 30);
+
+        
+        doc.setFontSize(12);
+        doc.setLineHeightFactor(1.5);
+        doc.text(`To Finalize Your Reservation Please Take This Form Along side 1,000 (1 Thousand)
+USD Dollors or Afghani 70,000 (70 thousand Afghani) To the ${hotelName}.
+        `,20,50);
+        doc.setLineHeightFactor(1);
+
+        doc.text(`Reservation Details: `, 20, 70);
+        doc.text(`Name: ${userName}`, 20, 80);
+        doc.text(`Date: ${year}-${month}-${day}`, 20, 90);
+        doc.text(`Guests Amount : ${reservedGuestsAmount}`, 20, 100);
+
+        doc.text(`Selcted Menu : ${reservedMenu}`, 20, 110);
+        doc.text(`Menu Total: ${totalPrice}`, 20, 120);
+        doc.text(`7% Hotel Service Charge: ${(totalPrice * 7) / 100} Afghani`, 20, 130);
+        doc.text(`Total Amount: ${totalPrice + (totalPrice * 7) / 100} Afghani`, 20, 140);
+        doc.text(`Prepaid Amount: ${repaidAmount} Afghani`, 20, 150);
+        doc.text(`Remainder Amount: ${(totalPrice + (totalPrice * 7 ) / 100) - repaidAmount} Afghani`, 20, 160);
+        doc.setLineHeightFactor(1.5);
+        doc.setTextColor("#c97f08");
+        doc.text(`Note: Your Event is during the Night Starting From 5 pm till 1 pm Sign The PDF
+and Pay the Prepaid Amount at the Hotel Management mentioned in Above. You
+can pay the Remainder Amount during your Event Night.`,20,170);
+
+doc.setLineHeightFactor(1);
+
+      doc.text(`Enjoy Your Event and Take Care.`,20,190);
+      doc.text(`ReservBest Team.`,20,200);
+      doc.text(`___________`,110,270);
+      doc.setFontSize(10);
+      doc.text(`Signature Place`,110,275);
+      
+
+        doc.save("reservation.pdf");
+    } else {
+        console.log('User is not logged in. PDF generation is not allowed.');
     }
-    }
+}
+
 
     const cancelReserv = (reservationId) => {
-      // Send a DELETE request to your API endpoint with the reservation ID
+      
       
       setReservationIdToDelete(reservationId);
       setShowConfirmationDialog(true);
@@ -61,10 +105,10 @@ const UserDashboard = () =>{
     };
     const deleteReservation = () => {
       if (reservationIdToDelete) {
-        // Send a DELETE request to your API endpoint with the reservation ID
+        
         axios.delete('http://localhost:5000/deleteReservedHotel', { data: { _id: reservationIdToDelete } })
-          .then(response => {
-            // Handle success, e.g., remove the reservation from the UI
+          .then(() => {
+            
             setFilteredReservationDetails(filteredReservationDetails.filter(detail => detail._id !== reservationIdToDelete));
           })
           .catch(error => {
@@ -86,14 +130,7 @@ const UserDashboard = () =>{
         .then((response) => {
           const desiredId = userData._id;
           const filteredDetails = response.data.filter((item) => item.userId === desiredId);
-          setFilteredReservationDetails(filteredDetails);
-
-          // setUserData(filteredDetails.userName)         
-          // setHotelDetail(filteredDetails.hotelName)   
-          // setSelectedDate(filteredDetails.reservedDate) 
-          // setSelectedMenu(filteredDetails.reservedMenu) 
-          // setTotalPrice(filteredDetails.totalPrice)   
-          // setDayStatus(filteredDetails.reservedStatus)    
+          setFilteredReservationDetails(filteredDetails);   
            setIsLoading(false);
         })
         .catch((err) => console.log(err.message));
@@ -119,12 +156,13 @@ const UserDashboard = () =>{
           {filteredReservationDetails.map((detail, index) => {
              const reservedDate = new Date(detail.reservedDate);
 
+
              const year = reservedDate.getFullYear().toString().slice(-2);
              const month = (reservedDate.getMonth() + 1).toString().padStart(2, '0');
              const day = reservedDate.getDate().toString().padStart(2, '0');
             return (
               <div key={index} className="card col-lg-4  col-sm-6 col-md-4 text-center" style={{color:"#c97f08"}}>
-                <div className="card-title">{detail.userName}</div>
+                <div className="card-title fw-bold " style={{fontSize:"18px"}}>{detail.userName}</div>
                 <div className="card-title">{detail.userEmail}</div>
               <div className="card-body">
                 <div className="d-flex align-items-center">
@@ -151,7 +189,7 @@ const UserDashboard = () =>{
                   <FontAwesomeIcon icon={faPeopleGroup}  className="mx-2"/>
                   <h5 className="card-title">{detail.reservedGuestsAmount}</h5>
                 </div>
-                <button onClick={() => downloadPdf(detail.userName,detail.hotelName,detail.totalPrice,detail.reservedDate,detail.reservedMenu,detail.reservedStatus,detail.reservedGuestsAmount)} className="btn btn-primary mx-3">
+                <button onClick={() => downloadPdf(detail.userName,detail.hotelName,detail.totalPrice,year,month,day,detail.reservedMenu,detail.reservedStatus,detail.reservedGuestsAmount)} className="btn btn-primary mx-3">
                   Download Form
                 </button>
                 <button onClick={() => cancelReserv(detail._id)} className="btn btn-danger mx-3">

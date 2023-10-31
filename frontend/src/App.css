@@ -212,6 +212,7 @@ transition:border-bottom 1s ease-in;
   font-family: Arial, sans-serif;
   max-width: 350px;
   margin: 0 auto;
+  padding:5px 20px;
 }
 .buttons{
   background:rgb(201, 127, 8); 
@@ -429,7 +430,7 @@ color:rgb(236, 230, 230);;
 }
 
 .menus{
-  padding:30px;
+  /* padding:30px; */
   overflow: hidden;
   color:#c97f08;
 
@@ -437,32 +438,12 @@ color:rgb(236, 230, 230);;
 .menus>h1{
   font-weight:bold;
 }
-.menus>div{
-  border:2px solid #c97f08;
-  padding:35px 20px;
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align:center;
-  border-radius: 10px;
-  margin-bottom: 20px;
- 
-}
+ .foods{
+  
+  padding:5px 20px;
+  margin-bottom: 20px; 
+ }
 
-label{
-  font-size: 25px;
-} 
-input[type="radio"]{
-  width:30px;
-  height:30px;
-  accent-color: #c97f08;
-  position:absolute;
-  right:10%;
-} 
-input[type="radio"]:active{
-  align-content:baseline;
-}
 
 .pagination .page-link {
   color: #c97f08;
@@ -528,10 +509,11 @@ input[type="number"]{
   border-radius:5px;
   padding:3px;
   margin-left:50px;
+  margin-right:50px;
 }
 .price{
   font-weight:bold;
-  font-size:30px;
+  font-size:25px;
   
 }
 .reserv{
@@ -570,7 +552,7 @@ th {
   left: 0;
   width: 100%;
   height: 100%;
-  
+  /* background:#e8c182; */
   background: rgba(0, 0, 0, 0.5); 
   z-index: 998;
   display: flex;
