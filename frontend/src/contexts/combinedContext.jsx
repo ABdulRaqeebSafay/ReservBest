@@ -9,6 +9,7 @@ import { UserProvider as UserProvider7 } from './dayStatusContext';
 import { UserProvider as UserProvider8 } from './guestAmountContext';
 import { UserProvider as UserProvider9 } from './hotelImageContext';
 import { UserProvider as UserProvider10 } from './hotelLocation';
+import { UserProvider as UserProvider11 } from './userRoleContext';
 
 
 const CombinedContext = createContext();
@@ -27,9 +28,11 @@ export function CombinedProvider({ children }) {
                   <UserProvider8>
                    <UserProvider9>
                    <UserProvider10>
-            <CombinedContext.Provider value={{ combinedData, setCombinedData }}>
-              {children}
-            </CombinedContext.Provider>
+                    <UserProvider11>
+                      <CombinedContext.Provider value={{ combinedData, setCombinedData }}>
+                        {children}
+                      </CombinedContext.Provider>
+                      </UserProvider11>
                       </UserProvider10>
                     </UserProvider9>
                   </UserProvider8>

@@ -9,6 +9,7 @@ import { useSelectedMenu } from "../contexts/menuContext";
 import { useTotalPrice } from "../contexts/totalPriceContext";
 import { useHotelDetail } from "../contexts/hotelContext";
 import { useDayStatus } from "../contexts/dayStatusContext";
+import { useUserRole } from '../contexts/userRoleContext';
 
 
 
@@ -17,6 +18,7 @@ import { useDayStatus } from "../contexts/dayStatusContext";
 const Navbar = () =>{
  
   const [isOpen, setIsOpen] = useState(true);
+  const {userRole} = useUserRole();
   // const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   const { userData, setUserData } = useUser();
@@ -94,23 +96,25 @@ return(<div className="navbar-page">
               </div> */}
 
               {!isLoggedIn ? <>
-                  <Link style={{color:"#c97f08",fontSize:"24px", marginRight:"30px"}}to={`/user/${userData._id}`}> 
-                    <FontAwesomeIcon icon={faUser} />
-                  </Link> 
-                    <i style={{ cursor: "pointer", color: "#c97f08",fontSize:"20px", marginRight:"30px" }}      className="" onClick={handleLogOut}>
+                {userRole === 'user' ?
+                <Link style={{color:"#c97f08",fontSize:"24px",    marginRight:"30px"}}to={`/user/${userData._id}`}> 
+                <FontAwesomeIcon icon={faUser} />
+                  </Link> : 
+                  <Link style={{color:"#c97f08",fontSize:"24px",    marginRight:"30px"}}to={`/hotelAdminPanel/${userData.hotelName}`}> 
+                  <FontAwesomeIcon icon={faUser} />
+                  </Link> }
+                  
+                    <i style={{ cursor: "pointer", color: "#c97f08",fontSize:"20px", marginRight:"30px" }}  onClick={handleLogOut}>
                     <FontAwesomeIcon icon={faSignOut} size="xl" />
-                  </i>  </>: ""
+                  </i>  </>: <>
+                 
+                  <Link to="signup" className="text-decoration-none me-3 button btn-md">Sign Up</Link>
+                  <Link to="login" className="text-decoration-none me-3 button btn-md">Log In</Link> 
+                  </> 
                 
    }
 
-             
-   {
-    isLoggedIn ? <>
-    
-    <Link to="signup" className="text-decoration-none me-3 button btn-md">Sign Up</Link>
-    <Link to="login" className="text-decoration-none me-3 button btn-md">Log In</Link>
-    </> : null
-   }
+  
    
    </div>  
         <div className="links">

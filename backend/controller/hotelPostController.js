@@ -14,7 +14,7 @@ import emailVerifier from 'email-verify';
 class HotelPostController {
   
   static async register(req, res) {
-    const { userName, userPhone, userEmail, userPassword } = req.body;
+    const { userName, userPhone, userEmail, userPassword, role, hotelName } = req.body;
   
     // Verify if the email address is valid
     emailVerifier.verify(userEmail, async (err, info) => {
@@ -22,7 +22,6 @@ class HotelPostController {
         return res.status(500).send("An error occurred while verifying the email");
       }
       if (!info.success) {
-        // If the email is not valid, send an error response
         return res.send("The email is not valid");
       }
   
@@ -30,29 +29,42 @@ class HotelPostController {
       const existingUser = await User.findOne({ userEmail });
   
       if (existingUser) {
-        // If the email is already registered, send an error response
         return res.send("The email is already registered");
       }
   
-      // If the email is valid and not registered, create a new user
       try {
-        const newUser = await User.create({
+        const userParams = {
           userName,
           userPhone,
           userEmail,
           userPassword,
-        });
-        res.status(201).send(newUser);
+          role,
+        };
+  
+        if (role === 'admin') {
+          userParams.hotelName = hotelName;
+        }
+  
+        const newUser = await User.create(userParams);
+  
+        if (role === 'admin') {
+          res.send("Admin registered successfully");
+        } else {
+          res.send("User registered successfully");
+        }
+  
         console.log(newUser);
       } catch (error) {
-        // Handle any errors that occur during user creation
         console.error(error);
         return res.status(500).send("An error occurred while creating the user");
       }
     });
   }
   
+  
+  
 
+  
   static async addHotels(req, res) {
     try {
         const { hotelName, hotelLocation, hotelDescription } = req.body;
@@ -81,32 +93,35 @@ class HotelPostController {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
-
 static async login(req, res) {
-  const { userEmail, userPassword } = req.body;
+  const { userEmail, userPassword, role, hotelName } = req.body;
 
-  // Find the user by email
-  const user = await User.findOne({ userEmail });
-
+  
+  const user = await User.findOne({ userEmail, role, hotelName });
   if (user) {
     if (user.userPassword === userPassword) {
-      const { userEmail, _id, userName, userPhone } = user;
-      res.json({ message: "success", body: { userEmail, _id, userName, userPhone } });
+      const { userEmail, _id, userName, userPhone,role } = user;
+      const responseBody = { userEmail, _id, userName, userPhone,role };
+
+      if (role === "admin") {
+        responseBody.role = role;
+        responseBody.hotelName = user.hotelName;
+      }
+
+      res.json({ message: "success", body: responseBody });
     } else {
       res.send("Password is incorrect");
     }
   } else {
-    res.send("Email is not found");
+    res.send("Email is not found or you have entered the wrong hotelName");
   }
 }
-
-  
-  
+ 
   static async addExtraMenu(req, res) {
 
     try {
-      const{hotelName, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
-      const addExtraMeal = await ExtraMenu.create({hotelName, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices});
+      const{hotelName,menuPrice, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
+      const addExtraMeal = await ExtraMenu.create({hotelName,menuPrice, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices});
       res.send(addExtraMeal);
       console.log(addExtraMeal);
     } catch (error) {
@@ -176,14 +191,33 @@ static async login(req, res) {
 
   static async reservationDetails(req,res){
     try {
-      const {userId, userName,userEmail, hotelName,reservedMenu,reservedDate,reservedStatus,reservedGuestsAmount,totalPrice} = req.body;
-      const reservationDetails = await reservationModel.create( {userId, userName,userEmail, hotelName,reservedMenu,reservedDate,reservedStatus,reservedGuestsAmount,totalPrice});
+      const {userId, userName,userEmail,userPhone, hotelName,reservedMenu,reservedDate,reservedStatus,reservedGuestsAmount,totalPrice} = req.body;
+      const reservationDetails = await reservationModel.create( {userId, userName,userEmail,userPhone, hotelName,reservedMenu,reservedDate,reservedStatus,reservedGuestsAmount,totalPrice});
       res.send(reservationDetails);
       console.log(reservationDetails);
     } catch (error) {
       console.error("Error saving to-do item:", error);
       res.status(500).send("Internal Server Error");
     } 
+  }
+  static async emailExist(req,res){
+    const { email } = req.body;
+
+
+    try {
+      
+      const user = await User.findOne({ userEmail: email });
+  
+      if (user) { 
+        res.send('Email exists in the database');
+      } else {
+        
+        res.send( 'Email not found in the database' );
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'An error occurred' });
+    }
   }
 }
 

@@ -294,16 +294,18 @@ transition:border-bottom 1s ease-in;
   border-radius:20px;
   padding:20px;
   box-shadow: 0 2px 4px #c97f08;
+  margin-top:50px;
 
 }
 .auth{
   width:600px;
-  height:400px;
-  
+  height:460px;
+
 }
 .register{
+
   width:500px;
-  height:500px;
+  height:550px;
 }
 
 .welcome,.create-account,.question{
@@ -318,7 +320,7 @@ transition:border-bottom 1s ease-in;
 @media (max-width: 991px) {
 
   .welcome,.create-account{
-    color:rgb(236, 230, 230);;
+    color:#c97f08;
   }
   .languages{
 
@@ -415,9 +417,9 @@ color:rgb(236, 230, 230);;
 .contact-form button {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   border:2px solid #c97f08;
-
+  display:inline;
   background-color: rgb(236, 230, 230);
   border-radius: 4px;
 }
@@ -595,4 +597,35 @@ th {
 
 .confirmation-dialog button:hover {
   background-color: white;
+}
+.popup{
+  position:absolute;
+  width:300px;
+  height:50px;
+  border-radius:10px;
+  padding:10px;
+  top:-50px;
+
+}
+.popup-show{
+  position:absolute;
+  width:300px;
+  height:50px;
+  border-radius:10px;
+  padding:10px;
+  top:0px;
+  transition:0.4s top ease-in-out;
+}
+.user-details{
+  width:100%;
+  height:100%;
+  background:rgba(149, 144, 144,0.1234);
+  padding:20px;
+  margin:20px;
+  box-shadow: 0 2px 4px rgba(17, 17, 0, 0.1);
+  overflow-x:hidden;
+
+}
+table{
+  color:#c97f08;
 }

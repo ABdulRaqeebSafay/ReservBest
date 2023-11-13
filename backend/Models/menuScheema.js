@@ -5,6 +5,10 @@ const menuScheema = new mongoose.Schema({
     type:String,
     required: true,
   },
+  menuPrice:{
+    type:Number,
+    required:true
+  },
   preMealService: {
       type: Array,
       required: true,

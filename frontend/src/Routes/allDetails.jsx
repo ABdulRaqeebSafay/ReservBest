@@ -9,6 +9,7 @@ import { useSelectedDate } from '../contexts/calendarContext';
 import { useDayStatus } from '../contexts/dayStatusContext';
 import { useLogged } from '../contexts/context';
 
+
 const AllDetails = () => {
   const { userData } = useUser();
   const hotelDetail = useHotelDetail();
@@ -21,13 +22,23 @@ const AllDetails = () => {
 
   const reservHotel = () => {
     
-    if (!isLoggedIn) {
-
+    if (!isLoggedIn 
+      &&userData._id
+    && userData.userName
+    && userData.userEmail
+    && userData.userPhone
+    && hotelDetail.hotelDetail
+    && selectedDate.selectedDate
+    && dayStatus.dayStatus
+    && selectedMenu.selectedMenu
+    && guestAmount.guestAmount
+    && totalPrice.totalPrice ) {
       axios
         .post('http://localhost:5000/reservationDetails', {
           userId: userData._id,
           userName: userData.userName,
           userEmail: userData.userEmail,
+          userPhone: userData.userPhone,
           hotelName: hotelDetail.hotelDetail,
           reservedDate: selectedDate.selectedDate,
           reservedStatus: dayStatus.dayStatus,

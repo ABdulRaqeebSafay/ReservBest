@@ -32,7 +32,7 @@ router.post('/addNormalMenu', HotelPostController.addNormalMenu);
 router.post('/addMenuGradeOne', HotelPostController.addMenuGradeOne);
 router.post('/addMenuGradeTwo', HotelPostController.addMenuGradeTwo);
 router.post('/addMenuGradeThree', HotelPostController.addMenuGradeThree);
-
+router.post('/emailExist',HotelPostController.emailExist);
 // REGISTER AND SIGNIN ROUTES
 
 router.post('/signup',HotelPostController.register)

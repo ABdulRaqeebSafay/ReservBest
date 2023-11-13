@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { useUserRole } from '../contexts/userRoleContext';
 
 
 
@@ -15,6 +16,7 @@ const Hotels = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState(''); 
   const [ setSearchResultMessage] = useState(""); 
+  const {userRole} = useUserRole();
   
 
   const itemsPerPage = 6; 
@@ -182,7 +184,7 @@ const Hotels = () => {
               <div
                 key={hotel._id}
                 className={`card text-center col-sm-6 col-md-4 my-2 ${
-                  index % 4 === 0 ? 'first-in-row' : ''
+                  index % 3 === 0 ? 'first-in-row' : ''
                 }`}
               >
                 <>
@@ -200,9 +202,17 @@ const Hotels = () => {
                       <FontAwesomeIcon icon={faMapMarkerAlt} />
                       <span className="mx-1">{hotel.hotelLocation}</span>
                     </p>
-                    <Link to={`/hotels/${hotel.hotelName}`} className="text-center button">
-                      Book Now
-                    </Link>
+                    {userRole === "user" ? (
+                  <Link to={`/hotels/${hotel.hotelName}`} className="text-center button">
+                    Book Now
+                  </Link>
+                ) : (
+                  <Link to={`/hotels/${hotel.hotelName}`} className="text-center button btn " disabled style={{ background:"#ceb182", color:"white", display:"inline", cursor:"not-allowed" }}>
+                    Book Now
+                  </Link>
+                )}
+
+
                   </div>
                 </>
               </div>

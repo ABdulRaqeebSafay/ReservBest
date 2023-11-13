@@ -96,8 +96,7 @@ doc.setLineHeightFactor(1);
 
 
     const cancelReserv = (reservationId) => {
-      
-      
+    
       setReservationIdToDelete(reservationId);
       setShowConfirmationDialog(true);
       
@@ -112,7 +111,7 @@ doc.setLineHeightFactor(1);
             setFilteredReservationDetails(filteredReservationDetails.filter(detail => detail._id !== reservationIdToDelete));
           })
           .catch(error => {
-            // Handle errors, e.g., show an error message
+            
             console.error('Error deleting reservation:', error);
           });
   
@@ -134,10 +133,10 @@ doc.setLineHeightFactor(1);
            setIsLoading(false);
         })
         .catch((err) => console.log(err.message));
-    }, [userData._id]);
+    });
 
     return (
-      <div className="" style={{paddingTop:"140px"}}>
+      <div className="" style={{paddingTop:"130px"}}>
           {showConfirmationDialog && (
         <div className="overlay">
           <div className="confirmation-dialog">
@@ -155,13 +154,11 @@ doc.setLineHeightFactor(1);
       <div className="row mt-4 align-items-center justify-content-center">  
           {filteredReservationDetails.map((detail, index) => {
              const reservedDate = new Date(detail.reservedDate);
-
-
              const year = reservedDate.getFullYear().toString().slice(-2);
              const month = (reservedDate.getMonth() + 1).toString().padStart(2, '0');
              const day = reservedDate.getDate().toString().padStart(2, '0');
             return (
-              <div key={index} className="card col-lg-4  col-sm-6 col-md-4 text-center" style={{color:"#c97f08"}}>
+              <div key={index} className="card col-lg-4  col-sm-6 col-md-4 text-center" style={{color:"#c97f08",border:"1px solid #c97f08"}}>
                 <div className="card-title fw-bold " style={{fontSize:"18px"}}>{detail.userName}</div>
                 <div className="card-title">{detail.userEmail}</div>
               <div className="card-body">
@@ -203,6 +200,7 @@ doc.setLineHeightFactor(1);
           </div>
               : <div className="text-center" style={{color:"#c97f08"}}>
               <h1 style={{color:"rgba(201, 127, 8,0.4)"}}>You have not any booked Hotel</h1>
+              <img src="/not-hotel-booked.svg" width="400"/>
                 <p>are you Interested to book some hotels? </p>
                 <Link to="/hotels" className="buttons">Hotels</Link>
               </div>
