@@ -10,6 +10,7 @@ import { useTotalPrice } from "../contexts/totalPriceContext";
 import { useHotelDetail } from "../contexts/hotelContext";
 import { useDayStatus } from "../contexts/dayStatusContext";
 import { useUserRole } from '../contexts/userRoleContext';
+import Logo from './logo.jsx'
 
 
 
@@ -76,6 +77,7 @@ return(<div className="navbar-page">
   </div>
 
 </div>
+            {/* <Logo /> */}
         <div className="langs mt-2">
                             
               {/* <div className="custom-dropdown languages float-end">

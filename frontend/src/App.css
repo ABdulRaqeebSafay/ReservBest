@@ -32,7 +32,8 @@ color:#c97f08;
 }
 
 .body{
-background-color: #c97f08
+background-color: #c97f08;
+
 }
 .langs{
   position:absolute;
@@ -323,9 +324,19 @@ transition:border-bottom 1s ease-in;
     color:#c97f08;
   }
   .languages{
-
     z-index:10000000000;
   }
+  
+  .typeWriter span{
+    width:10%;
+   margin-right:40px;
+
+  }
+  .typeWriter span:nth-child(2){
+    width:20%;
+    margin-right:140px;
+  }
+
 
 }
 .create-account{
@@ -420,8 +431,13 @@ color:rgb(236, 230, 230);;
   margin-bottom: 0px;
   border:2px solid #c97f08;
   display:inline;
-  background-color: rgb(236, 230, 230);
   border-radius: 4px;
+}
+.contact-form textarea{
+  height:100px;
+}
+.contact-form label{
+  color:#c97f08;
 }
 
 .contact-form button {
@@ -613,6 +629,7 @@ th {
   height:50px;
   border-radius:10px;
   padding:10px;
+  left:50%;
   top:0px;
   transition:0.4s top ease-in-out;
 }
@@ -629,3 +646,75 @@ th {
 table{
   color:#c97f08;
 }
+
+.typeWriter {
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.typeWriter span {
+  font-size: 30px;
+  font-weight: bold;
+  color: #c97f08;
+  overflow: hidden;
+  font-family: "Courier New", monospace;
+  letter-spacing: 2px;
+  animation:typeWriterAnimation 10s infinite;
+  padding-right: 0px;
+  
+  width: 13%;
+}
+
+@keyframes typeWriterAnimation {
+  0% {
+    width: 11%;
+  }
+  50% {
+    width: 1.7%;
+  }
+  100% {
+    width: 11%;
+  
+  }
+}
+
+/* Media query for medium screens */
+@media screen and (max-width: 768px) {
+  .typeWriter span {
+    font-size: 20px;
+    
+  }
+
+  @keyframes typeWriterAnimation {
+    0% {
+      width: 11%;
+    }
+    50% {
+      width: 5%;
+    }
+    100% {
+      width: 11%;
+      padding-right: 0;
+      
+    }
+  }
+}
+@media screen and (max-width: 480px) {
+  .typeWriter span {
+    font-size: 16px;
+    width:17%;
+    margin:0;
+    padding:0;
+    padding-right:20px;
+    margin-left:10px;
+  }
+  
+}
+.menuForms{
+  width:100%;
+  height:40px;
+  border:2px solid #c97f08;
+  border-radius:3px;
+}
+

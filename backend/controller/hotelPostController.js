@@ -132,8 +132,8 @@ static async login(req, res) {
   
   static async addSpecialMenu(req, res) {
     try {
-      const {hotelName, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
-      const addSpcialMeal = await SpecialMenu.create({hotelName, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices});
+      const {hotelName,menuPrice, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
+      const addSpcialMeal = await SpecialMenu.create({hotelName, menuPrice,preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices});
       res.send(addSpcialMeal);
       console.log(addSpcialMeal);
     } catch (error) {
@@ -144,8 +144,8 @@ static async login(req, res) {
   
   static async addNormalMenu(req, res) {
     try {
-      const {hotelName, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
-      const addNormalMeal = await NormalMenu.create({hotelName, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices});
+      const {hotelName,menuPrice, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
+      const addNormalMeal = await NormalMenu.create({hotelName,menuPrice, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices});
       res.send(addNormalMeal);
       console.log(addNormalMeal);
     } catch (error) { 
@@ -156,8 +156,8 @@ static async login(req, res) {
 
   static async addMenuGradeTwo(req, res) {
     try {
-      const {hotelName, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
-      const addMenuGradeTwo = await MenuGrade2.create( {hotelName, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices});
+      const {hotelName,menuPrice, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
+      const addMenuGradeTwo = await MenuGrade2.create( {hotelName, menuPrice,preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices});
       res.send(addMenuGradeTwo);
       console.log(addMenuGradeTwo);
     } catch (error) {
@@ -167,8 +167,8 @@ static async login(req, res) {
   }
   static async addMenuGradeOne(req, res) {
     try {
-      const {hotelName, preMealService, meat,rice,drinks,fruites,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
-      const addMenuGradeOne = await MenuGrade1.create( {hotelName, preMealService, meat,rice,drinks,fruites,remnants,additionals, afterMealServices});
+      const {hotelName,menuPrice, preMealService, meat,rice,drinks,fruites,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
+      const addMenuGradeOne = await MenuGrade1.create( {hotelName, menuPrice,preMealService, meat,rice,drinks,fruites,remnants,additionals, afterMealServices});
       res.send(addMenuGradeOne);
       console.log(addMenuGradeOne);
     } catch (error) {
@@ -179,8 +179,8 @@ static async login(req, res) {
 
   static async addMenuGradeThree(req, res) {
     try {
-      const {hotelName, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
-      const addMenuGradeThree = await MenuGrade3.create( {hotelName, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices});
+      const {hotelName,menuPrice, preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices} = req.body; // Destructure preMealService correctly
+      const addMenuGradeThree = await MenuGrade3.create( {hotelName, menuPrice,preMealService, meat,rice,drinks,fruits,remnants,additionals, afterMealServices});
       res.send(addMenuGradeThree);
       console.log(addMenuGradeThree);
     } catch (error) {

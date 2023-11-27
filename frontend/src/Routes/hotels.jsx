@@ -202,15 +202,11 @@ const Hotels = () => {
                       <FontAwesomeIcon icon={faMapMarkerAlt} />
                       <span className="mx-1">{hotel.hotelLocation}</span>
                     </p>
-                    {userRole === "user" ? (
+                    
                   <Link to={`/hotels/${hotel.hotelName}`} className="text-center button">
                     Book Now
                   </Link>
-                ) : (
-                  <Link to={`/hotels/${hotel.hotelName}`} className="text-center button btn " disabled style={{ background:"#ceb182", color:"white", display:"inline", cursor:"not-allowed" }}>
-                    Book Now
-                  </Link>
-                )}
+                
 
 
                   </div>

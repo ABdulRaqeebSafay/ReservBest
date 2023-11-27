@@ -19,11 +19,16 @@ const AllDetails = () => {
   const selectedDate = useSelectedDate();
   const dayStatus = useDayStatus();
   const {isLoggedIn} = useLogged();
+  const isButtonDisabled =
+  guestAmount.guestAmount === "" || guestAmount.guestAmount === 0 ||
+  selectedDate.selectedDate === null || selectedMenu.selectedMenu === null;
+
+
 
   const reservHotel = () => {
     
     if (!isLoggedIn 
-      &&userData._id
+    &&userData._id
     && userData.userName
     && userData.userEmail
     && userData.userPhone
@@ -59,7 +64,7 @@ const AllDetails = () => {
 
   return (
     <div>
-      <button className="reserv" onClick={reservHotel}>Reserve Hotel</button>
+      <button className="reserv " disabled={isButtonDisabled}  onClick={reservHotel}>Reserve Hotel</button>
     </div>
   );
 };

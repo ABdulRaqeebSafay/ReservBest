@@ -5,16 +5,20 @@ import * as yup from 'yup';
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import PopUp from "./popUp";
 
 const Signup = () => {
   let navigate = useNavigate();
   const [data, setData] = useState("");
   const [isLoading, setIsLoading] = useState(false); 
+  const [emailMessageSent,setEmailMessageSent] = useState('');
+  const [popup,setPopUp] = useState("popup");
+
 
   const schema = yup.object({
     name: yup.string().required('Name is a required field'),
     email: yup.string().email('Please enter a valid email').required('Email is a required field'),
-    phone: yup.number().required().min(10),
+    phone:yup.string().required().matches(/^\+93\d{9}$/, 'Phone number must start with +93 and be 12 characters long'),
     password: yup.string().min(4).max(32).required('Password is a required field'),
     role: yup.string().required('Role is a required field'),
     hotelName: yup.string().when('role', (role,schema) =>{
@@ -40,9 +44,13 @@ const Signup = () => {
     axios.post("http://localhost:5000/signup", requestBody)
     .then((response) => {
       setIsLoading(false);
-      console.log(response.data)
+      console.log(response.data);
       if (response.data === "User registered successfully" || response.data === "Admin registered successfully") {
-        navigate("/login");
+        setPopUp("popup-show");
+        setEmailMessageSent("Successful Registeration");
+        setTimeout(() =>{
+          navigate("/login");
+        },3000)
       } else {
         setData(response.data);
       }
@@ -114,15 +122,43 @@ const { values, touched, handleChange, handleSubmit, errors } = useFormik({
             {errors.phone && touched.phone && <small className="text-danger">{errors.phone}</small>}
           </div>
           <div className="form-group">
-            <input type="email" onChange={handleChange} placeholder="Enter your email" value={values.email} id="email" className="register-inputes" /><br />
-            {values.role === "admin" ? (
-              data !== "A hotel with the same name already exists" || data == "The email is not valid" ? (
-                <small className="text-danger">{data}</small>
-              ) : errors.email && touched.email && (
-                <small className="text-danger">{errors.email}</small>
-              )
-            ) : null}
-          </div>
+  <input
+    type="email"
+    onChange={handleChange}
+    placeholder="Enter your email"
+    value={values.email}
+    id="email"
+    className="register-inputes"
+  />
+  <br />
+  {values.role === "user" && (
+    <div>
+      {data === "The email is already registered" && (
+        <small className="text-danger">{data}</small>
+      )}
+      {data === "The email is not valid" && (
+        <small className="text-danger">{data}</small>
+      )}
+      {errors.email && touched.email && (
+        <small className="text-danger">{errors.email}</small>
+      )}
+    </div>
+  )}
+  {values.role === "admin" && (
+    <div>
+      {data === "A hotel with the same name already exists" && (
+        <small className="text-danger">{data}</small>
+      )}
+      {data === "The email is not valid" && (
+        <small className="text-danger">{data}</small>
+      )}
+      {errors.email && touched.email && (
+        <small className="text-danger">{errors.email}</small>
+      )}
+    </div>
+  )}
+</div>
+
           <div className="form-group">
             <input value={values.password} onChange={handleChange} placeholder="Enter your password" type="password" id="password" className="register-inputes" /><br />
             {errors.password && touched.password && <small className="text-danger">{errors.password}</small>}
@@ -141,6 +177,7 @@ const { values, touched, handleChange, handleSubmit, errors } = useFormik({
             <Link className="create-account" to="/login">Log In</Link>
           </div>
         </form>
+        <PopUp emailMessageSent={emailMessageSent} popUpStyle={popup}/>
       </div>
     </>
   );

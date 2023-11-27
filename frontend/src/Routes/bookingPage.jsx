@@ -48,7 +48,7 @@ const BookingPage = () => {
 
   return (
     <div className="booking-page">
-      <h1 className="text-center text-danger" style={{ paddingTop: '100px' }}>
+      <h1 className="text-center " style={{color:"#c97f08", paddingTop: '100px' }}>
         Welcome to {hotel_name} Menu
       </h1>
     <div className="row">
