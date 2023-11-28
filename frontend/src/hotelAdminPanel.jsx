@@ -121,7 +121,7 @@ const HotelAdminPanel = () => {
             {/* <AddHotel /> */}
             <ExtraMenuForms />
             
-              <Calendar />
+              {/* <Calendar /> */}
               <div className="mx-2 user-details">
                 <table className="table" style={{ color: "#c97f08" }}>
                   <thead>

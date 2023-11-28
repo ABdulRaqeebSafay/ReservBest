@@ -72,7 +72,7 @@ const BookingPage = () => {
             
           </div>
           <div className="col">
-            <button className="btn btn-primary" onClick={handleShowMenu}>Show Menu</button>
+            <button className="btn" style={{background:"#c97f08",color:"white "}} onClick={handleShowMenu}>Show Menu</button>
           </div>
         </div>
         {currentMenu ? (

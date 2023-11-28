@@ -1,63 +1,23 @@
-import  { useState } from 'react';
+import React, { useState } from 'react';
 import { startOfMonth, addDays, format, isSameMonth, isToday } from 'date-fns';
 import { useSelectedDate } from './contexts/calendarContext';
 import { useDayStatus } from './contexts/dayStatusContext';
 
-
 const Calendar = () => {
-
   const today = new Date();
-  const {setSelectedDate} = useSelectedDate();
-  const {setDayStatus} = useDayStatus();
+  const { selectedDate, setSelectedDate } = useSelectedDate();
+  const { setDayStatus } = useDayStatus();
   const [currentMonth, setCurrentMonth] = useState(today);
-  const [userMode, setUserMode] = useState(false); 
 
   const startDate = startOfMonth(currentMonth);
   const daysInMonth = Array.from({ length: 42 }, (_, index) =>
     addDays(startDate, index)
   );
 
-  
-  const [selectedOptions, setSelectedOptions] = useState({});
-  const [ dropDownOpen,setDropdownOpen] = useState({});
-
-  const handleOptionSelect = (day, option) => {
-    
-    if (option === 'book' || option === 'pending') {
-      
-      if (userMode) {
-        setSelectedOptions((prevOptions) => ({
-          ...prevOptions,
-          [day]: option,
-        }));
-  
-        
-        setDropdownOpen((prevDropdownState) => ({
-          ...prevDropdownState,
-          [day]: false,
-        }));
-  
-        setSelectedDate(format(day, 'yyyy-MM-dd'));
-        setDayStatus(option)
-      }
-    } else {
-      
-      setSelectedOptions((prevOptions) => ({
-        ...prevOptions,
-        [day]: option,
-      }));
-  
-      
-      setDropdownOpen((prevDropdownState) => ({
-        ...prevDropdownState,
-        [day]: false,
-      }));
-  
-      setSelectedDate(format(day, 'yyyy-MM-dd'));
-      setDayStatus(option);
-    }
+  const handleOptionSelect = (day) => {
+    setSelectedDate(format(day, 'yyyy-MM-dd'));
+    setDayStatus('booked');
   };
-  
 
   return (
     <div className="calendar mt-5">
@@ -77,83 +37,22 @@ const Calendar = () => {
         >
           Next
         </button>
-          <input
-            type="checkbox"
-            checked={userMode}
-            onChange={() => setUserMode(!userMode)}
-          />
-         
       </div>
       <div className="calendar-grid">
         {daysInMonth.map((day) => (
           <div
             key={day}
-            className={`calendar-day ${isSameMonth(day, startDate) ? 'current-month' : 'other-month'} ${
-              isToday(day) ? 'today' : ''
+            className={`calendar-day ${
+              isSameMonth(day, startDate) ? 'current-month' : 'other-month'
+            } ${isToday(day) ? 'today' : ''} ${
+              selectedDate === format(day, 'yyyy-MM-dd') ? 'selected-date' : ''
             }`}
+            onClick={() => handleOptionSelect(day)}
           >
-            <div className="dropdown">
-              <button
-                className="dropdown-toggle"
-                type="button"
-                id={`dropdownMenuButton${format(day, 'd')}`}
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style={{
-                  fontSize:
-                  selectedOptions[day] === 'pending' ? '11px' : '14px',
-                  backgroundColor:
-                    selectedOptions[day] === 'book' ? 'red' :
-                    selectedOptions[day] === 'pending' ? 'gray' : '',
-                }}
-                disabled={userMode && (selectedOptions[day] === 'book' || selectedOptions[day] === 'pending')}
-              >
-                {selectedOptions[day] || format(day, 'd')}
-              </button>
-              <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton${format(day, 'd')}`}>
-                <li>
-                  <button
-                    className={`dropdown-item ${
-                      (!userMode && (selectedOptions[day] === format(day, 'd') || selectedOptions[day] === undefined)) ? '' : ''
-                    }`}
-                    onClick={() => handleOptionSelect(day, format(day, 'd'))}
-                    disabled={userMode && (selectedOptions[day] === 'book' || selectedOptions[day] === 'pending')}
-                  >
-                    {format(day, 'd')}
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={`dropdown-item ${
-                      (!userMode || (userMode && (selectedOptions[day] === 'book' || selectedOptions[day] === 'pending')) ||
-                      (selectedOptions[day] === 'book' && !userMode)
-                    ) ? 'active' : ''
-                    }`}
-                    onClick={() => handleOptionSelect(day, 'book')}
-                    disabled={userMode && selectedOptions[day] === 'pending'}
-                  >
-                    book
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={`dropdown-item ${
-                      (!userMode || (userMode && (selectedOptions[day] === 'book' || selectedOptions[day] === 'pending')) ||
-                      (selectedOptions[day] === 'pending' && !userMode)
-                    ) ? 'active' : ''
-                    }`}
-                    onClick={() => handleOptionSelect(day, 'pending')}
-                    disabled={userMode && selectedOptions[day] === 'book'}
-                  >
-                  Pending 
-                  </button>
-                </li>
-              </ul>
-            </div>
+            {format(day, 'd')}
           </div>
         ))}
       </div>
-      
     </div>
   );
 };

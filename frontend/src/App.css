@@ -717,4 +717,22 @@ table{
   border:2px solid #c97f08;
   border-radius:3px;
 }
+.calendar-day{
+  cursor:pointer;
+  background:#c97f08;
+  border-radius:10px;
+  width:40px;
+  height:40px;
+  display:flex;
+  text-align:center;
+  align-items:center;
+  justify-content:center
+}
 
+.selected-date {
+  background-color: red;
+  color: white;
+  border-radius: 4px;
+  text-align:center;
+  cursor:pointer
+}
